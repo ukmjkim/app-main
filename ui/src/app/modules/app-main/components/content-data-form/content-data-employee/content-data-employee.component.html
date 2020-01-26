@@ -1,0 +1,79 @@
+
+<div class="card m-3">
+    <h5 class="card-header">{{dialogLabel}}</h5>
+    <div class="card-body">
+        <form [formGroup]="registerForm">
+            <div class="form-row">
+              <div class="form-group col-6">
+                <label>First Name</label>
+                <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                    <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                </div>
+              </div>
+              <div class="form-group col-6">
+                <label>Last Name</label>
+                <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row" *ngIf="isNew">
+              <div class="form-group col-6">
+                <label>Login Name</label>
+                <input type="text" formControlName="loginName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.loginName.errors }" />
+                <div *ngIf="submitted && f.loginName.errors" class="invalid-feedback">
+                    <div *ngIf="f.loginName.errors.required">Login Name is required</div>
+                </div>
+              </div>
+              <div class="form-group col-6">
+                <label>Password</label>
+                <input type="text" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Phone</label>
+                    <input type="text" formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+                    <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                        <div *ngIf="f.phone.errors.required">Phone is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Role</label>
+                    <select formControlName="role" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let role of roleList" [value]="role.id">{{ContentDataItemDto.getKeyRole(role, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                        <div *ngIf="f.role.errors.required">Role is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Active</label>
+                    <div class="input-value">
+                      <div class="switch-field">
+                          <input type="radio" id="is-active-yes" formControlName="isActive" class="form-control" [value]="true" name="isActive" />
+                          <label for="is-active-yes">Yes</label>
+                          <input type="radio" id="is-active-no" formControlName="isActive" class="form-control" [value]="false" name="isActive" />
+                          <label for="is-active-no">No</label>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary mr-1" (click)="onSubmit()">Submit</button>
+                <button class="btn btn-warning mr-1" type="button" (click)="onDelete()" *ngIf="!isNew" [disabled]="true">Delete</button>
+                <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Clear</button>
+                <button class="btn btn-secondary" type="close" (click)="onClose()">Close</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+
+<div class="card m-3">
+    <h5 class="card-header">{{dialogLabel}}</h5>
+    <div class="card-body">
+        <form [formGroup]="registerForm">
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Farm</label>
+                    <select formControlName="farm" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.farm.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let farm of farmList" [value]="farm.id">{{ContentDataItemDto.getKeyFarm(farm, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.farm.errors" class="invalid-feedback">
+                        <div *ngIf="f.farm.errors.required">Farm is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Sale Manager</label>
+                    <select formControlName="saleManager" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.saleManager.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let salesManager of salesManagers" [value]="salesManager.id">{{ContentDataItemDto.getKeyEmployee(salesManager, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.saleManager.errors" class="invalid-feedback">
+                        <div *ngIf="f.saleManager.errors.required">Sale Manager is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label>Acres</label>
+                    <input type="text" formControlName="acres" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.acres.errors }" />
+                    <div *ngIf="submitted && f.acres.errors" class="invalid-feedback">
+                        <div *ngIf="f.acres.errors.required">Acres is required</div>
+                        <div *ngIf="f.acres.errors.pattern">Acres must be number</div>
+                    </div>
+                </div>
+                <div class="form-group col-3">
+                    <label>Desired Moisture</label>
+                    <input type="text" formControlName="desiredMoisture" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.desiredMoisture.errors }" />
+                    <div *ngIf="submitted && f.desiredMoisture.errors" class="invalid-feedback">
+                        <div *ngIf="f.desiredMoisture.errors.required">Desired Moisture is required</div>
+                        <div *ngIf="f.desiredMoisture.errors.pattern">Desired Moisture must be number</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Dropoff Date Time</label>
+                    <input type="datetime-local" formControlName="dropoffDateTime" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dropoffDateTime.errors }" />
+                    <div *ngIf="submitted && f.dropoffDateTime.errors" class="invalid-feedback">
+                        <div *ngIf="f.dropoffDateTime.errors.required">Dropoff Date Time is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Need Chop</label>
+                    <div class="input-value">
+                      <div class="switch-field">
+                          <input type="radio" id="is-need-chop-yes" formControlName="isChopNeeded" class="form-control" [value]="true" name="isChopNeeded" />
+                          <label for="is-need-chop-yes">Yes</label>
+                          <input type="radio" id="is-need-chop-no" formControlName="isChopNeeded" class="form-control" [value]="false" name="isChopNeeded" />
+                          <label for="is-need-chop-no">No</label>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary mr-1" (click)="onSubmit()">Submit</button>
+                <button class="btn btn-warning mr-1" type="button" (click)="onDelete()" *ngIf="!isNew" [disabled]="true">Delete</button>
+                <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Clear</button>
+                <button class="btn btn-secondary" type="close" (click)="onClose()">Close</button>
+            </div>
+        </form>
+    </div>
+</div>

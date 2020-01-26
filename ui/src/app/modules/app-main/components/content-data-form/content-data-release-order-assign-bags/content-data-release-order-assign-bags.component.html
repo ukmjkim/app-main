@@ -1,0 +1,90 @@
+
+<div class="card m-3">
+    <h5 class="card-header">Assign Bags to Release Order</h5>
+    <div class="card-body">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label>Farm</label>
+                    <input type="text" [value]="data.contentDataItemDto.keyFarm" class="form-control" [readOnly]="true" />
+                </div>
+                <div class="form-group col-4">
+                    <label>Shipping Date Time</label>
+                    <input type="text" [value]="data.contentDataItemDto.shippingDateTime | date:'short':'UTC'" class="form-control" [readOnly]="true" />
+                </div>
+                <div class="form-group col-4">
+                    <label>Truck License Place</label>
+                    <input type="text" [value]="data.contentDataItemDto.truckLicensePlate" class="form-control" [readOnly]="true" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Production Manager</label>
+                    <input type="text" [value]="data.contentDataItemDto.keyProductionManager" class="form-control" [readOnly]="true" />
+                </div>
+                <div class="form-group col-6">
+                    <label>Accounting Manager</label>
+                    <input type="text" [value]="data.contentDataItemDto.keyAccountingManager" class="form-control" [readOnly]="true" />
+                </div>
+            </div>
+
+            <div class="form-row mt-2">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col-1">#</th>
+                    <th scope="col-2">Bag</th>
+                    <th scope="col-2">Weight(lb)</th>
+                    <th scope="col-2">Moisture%</th>
+                    <th scope="col-2">Entered On</th>
+                    <th scope="col-1">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let releaseOrderBag of releaseOrderBagList">
+                    <td scope="row">{{releaseOrderBag.id}}</td>
+                    <td>{{releaseOrderBag.bag.name}}</td>
+                    <td>{{releaseOrderBag.bag.dryWeight}}</td>
+                    <td>{{releaseOrderBag.bag.testingCOALogs && releaseOrderBag.bag.testingCOALogs[0] ? releaseOrderBag.bag.testingCOALogs[0].moisture : '' }}</td>
+                    <td>{{releaseOrderBag.bag.createdDateTime | date:'short':'UTC'}}</td>
+                    <td class="cursor-pointer"><mat-icon matTooltip="Delete Release Order Bag" (click)="onDeleteReleaseOrderBag(releaseOrderBag.id)">delete</mat-icon></td>
+                  </tr>
+                  <tr>
+                    <td scope="row">Total</td>
+                    <td>{{totalBags}}</td>
+                    <td>{{totalDryWeight}}</td>
+                    <td colspan="3"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <hr />
+
+            <div class="form-row mt-4">
+                <div class="form-group col-11">
+                    <label>Drying Order</label>
+                    <mat-form-field>
+                      <mat-select single>
+                        <mat-option *ngFor="let dryingOrder of dryingOrderList" [value]="dryingOrder" (onSelectionChange)="changeDryingOrder(dryingOrder.id)">{{ContentDataItemDto.getKeyDryingOrder(dryingOrder, dateFormatPipe)}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-11">
+                    <label>Tested Bags</label>
+                    <mat-form-field>
+                      <mat-select multiple>
+                        <mat-option *ngFor="let bag of readyBagList" [value]="bag" (onSelectionChange)="assignBag($event)">{{ContentDataItemDto.getKeyBag(bag, dateFormatPipe)}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-1">
+                    <button type="button" class="btn btn-primary mt-4" (click)="onAddBags()">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

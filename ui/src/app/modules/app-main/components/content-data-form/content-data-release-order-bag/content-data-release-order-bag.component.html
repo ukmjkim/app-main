@@ -1,0 +1,37 @@
+
+<div class="card m-3">
+    <h5 class="card-header">{{dialogLabel}}</h5>
+    <div class="card-body">
+        <form [formGroup]="registerForm">
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Bag</label>
+                    <select formControlName="bag" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.bag.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let bag of bagList" [value]="bag.id">{{ContentDataItemDto.getKeyBag(bag, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.bag.errors" class="invalid-feedback">
+                        <div *ngIf="f.bag.errors.required">Bag is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Release Order</label>
+                    <select formControlName="releaseOrder" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.releaseOrder.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let releaseOrder of releaseOrderList" [value]="releaseOrder.id">{{ContentDataItemDto.getKeyReleaseOrder(releaseOrder, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.releaseOrder.errors" class="invalid-feedback">
+                        <div *ngIf="f.releaseOrder.errors.required">Release Order is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary mr-1" (click)="onSubmit()">Submit</button>
+                <button class="btn btn-warning mr-1" type="button" (click)="onDelete()" *ngIf="!isNew" [disabled]="true">Delete</button>
+                <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Clear</button>
+                <button class="btn btn-secondary" type="close" (click)="onClose()">Close</button>
+            </div>
+        </form>
+    </div>
+</div>
