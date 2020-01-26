@@ -1,0 +1,25 @@
+<aid-page-simple class="page-simple" [fullWidth]="true" [pageTitle]="'Pickups'" [pageInfo]="appMainState.eventPageInfo ? appMainState.eventPageInfo : appMainState.sitePageInfo">
+    <ng-container ngProjectAs="headerActionButton">
+        <div class="text-right">
+            <!-- <aid-pickup-action-upsert *ngIf="appMainState" id="{{id}}-po-create" [appMainState]="appMainState">
+            </aid-pickup-action-upsert> -->
+        </div>
+    </ng-container>
+    <div class="card-body" *ngIf="appMainState">
+        <aid-pickup-search *ngIf="appMainState" id="{{id}}-po-table" [appMainState]="appMainState" (selectedRows)="selectedPurchaseOrder($event)">
+          <div id="action-area" class="action-area mt-2" *ngIf="purchaseOrderNumberList.length > 0">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div fxLayout="row" fxLayoutAlign="start center" id="action-buttons">
+                <div class="selected-assets mr-2">
+
+                </div>
+
+                <div class="mr-2">
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </aid-pickup-search>
+    </div>
+</aid-page-simple>

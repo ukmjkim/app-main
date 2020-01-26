@@ -1,0 +1,173 @@
+<div class="data-table--header">
+  <h3 class="header--title">{{dataSource?.rowCount() | async}} Pickups</h3>
+  <aid-search-input class="header--search">
+    <input id="searchItemInput" type="text" class="form-control" [(ngModel)]="search" placeholder="Keywords (hit Enter to search)"
+      aria-describedby="basic-addon1" #searchInputBox (keyup.enter)="applyGlobalSearch()">
+    <button id="searchItemButton" class="btn btn-primary" (click)="applyGlobalSearch()">{{isAdvancedShown ? 'Advanced Search' : 'Search'}}
+    </button>
+  </aid-search-input>
+  <div class="header--toolbar">
+    <aid-data-table-config-search-criteria [dataTable]="table" [dataSource]="dataSource" [visibleColumnsOnly]=false></aid-data-table-config-search-criteria>
+    <aid-data-table-active-filter-sort-chip [dataSource]="dataSource" [clearAll]="true"></aid-data-table-active-filter-sort-chip>
+    <a id="export-to-excel-button" (click)="exportToExcel()" class="thumbnail-view-button mat-elevation-z3">
+      <mat-icon matTooltip="Export to Excel">save_alt</mat-icon>
+    </a>
+    <a id="view-refresh" (click)="applyGlobalSearch()" class="thumbnail-view-button mat-elevation-z3">
+      <mat-icon matTooltip="Refresh">refresh</mat-icon>
+    </a>
+    <aid-data-table-column-selector id="{{id}}-column-selector" [dataTable]="table"></aid-data-table-column-selector>
+  </div>
+</div>
+
+<aid-data-table-active-filter-sort-chip [dataSource]="dataSource" [dateFormat]="dateFormat"></aid-data-table-active-filter-sort-chip>
+
+<div ngif="appMainState && dataSource">
+  <aid-data-table #table id="{{id}}-datatable" [dataSource]="dataSource" [displayedColumns]="displayedColumns" [dateFormat]="dateFormat"
+    [multisort]="true" [enableSelection]="true" [showExpandToggle]="true" [pageSize]="numberOfItemsPerPage" [pageSizeOptions]="pageSizeOptions">
+
+    <ng-container *aidColDef="'pickupId';
+                              let row = row;
+                              header: 'Pickup #';
+                              width: '90px';
+                              headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE;
+                              filterType:FilterTypeEnum.TEXT;">
+      <span class="clickable-po-number" [ngClass]="{'s-voided': row?.status === 'Canceled'}">{{row.pickupId}}</span>
+    </ng-container>
+
+    <ng-container *aidColDef="'saleNumber';
+                              let row = row;
+                              header: 'Sale Number';
+                              width: '120px';
+                              headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE;
+                              filterType:FilterTypeEnum.TEXT;">
+      <div class="row-container" [ngClass]="{'s-voided': row?.status === 'Canceled'}">
+        {{row.saleNumber}}
+      </div>
+    </ng-container>
+
+
+    <ng-container *aidColDef="'createdTS';
+                              let row = row;
+                              header: 'Scheduled On';
+                              width: '120px';
+                              headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE;
+                              filterType:FilterTypeEnum.DATE_RANGE;">
+      <div class="row-container" [ngClass]="{'s-voided': row?.status === 'Canceled'}">
+        {{row.createdTS | date:dateFormat}}
+      </div>
+    </ng-container>
+
+    <ng-container *aidColDef="'pickupDate';
+                              let row = row;
+                              header: 'Pickup Date';
+                              width: '90px';">
+      <div class="row-container text-right pr-2" [ngClass]="{'s-voided': row?.status === 'Canceled'}">
+        {{row.pickupDate}}
+      </div>
+    </ng-container>
+
+    <ng-container *aidColDef="'timeslot';
+                              let row = row;
+                              header: 'Timeslot';
+                              width: '90px';">
+      <div class="row-container text-right pr-2" [ngClass]="{'s-voided': row?.status === 'Canceled'}">
+        {{row.timeslot}}
+      </div>
+    </ng-container>
+
+    <ng-container *aidColDef="'numberOfItems';
+                              let row = row;
+                              header: '# Items';
+                              width: '90px';
+                              headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE;
+                              filterType:FilterTypeEnum.NUMBER_RANGE;">
+      <div class="row-container text-right pr-2" [ngClass]="{'s-voided': row?.status === 'Canceled'}">
+        {{row.numberOfItems}}
+      </div>
+    </ng-container>
+
+    <ng-container *aidColDef="'status';
+                              let row = row;
+                              header: 'Status';
+                              width: '110px';
+                              headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE;
+                              filterType:FilterTypeEnum.PICKLIST;">
+      <div class="row-container text-right pr-2" [ngClass]="{'s-voided': row?.status === 'Canceled'}">
+        {{row.status}}
+      </div>
+    </ng-container>
+
+    <ng-container *aidColDef="'isExpress';
+                              let row = row;
+                              header: 'Express';
+                              width: '110px';
+                              headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE;
+                              filterType:FilterTypeEnum.PICKLIST;">
+      <div class="row-container text-right pr-2" [ngClass]="{'s-voided': row?.status === 'Canceled'}">
+        <div *ngIf="row.isExpress" fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon class="text-success">check_circle_outline</mat-icon>
+        </div>
+        <div *ngIf="!row.isExpress" fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon class="text-danger">highlight_off</mat-icon>
+        </div>
+      </div>
+    </ng-container>
+
+
+    <ng-container *aidColDef="'issues';
+                              let row = row;
+                              header: 'Issues';
+                              width: '200px';
+                              headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE;
+                              filterType:FilterTypeEnum.TEXT;">
+      <div class="row-container text-right pr-2" [ngClass]="{'s-voided': row?.status === 'Canceled'}">
+        {{row.issues}}
+      </div>
+    </ng-container>
+
+    <!-- START: Line Items Expanded Row Definition -->
+    <ng-container *aidExpandedRowDef="let pickup = row">
+      <aid-sub-table id="{{id}}-sub-table-{{pickup.pickupId}}" [data]="pickup.items">
+        <ng-container *aidSubTableColDef="let lot = row; header: 'Lot #'">
+          {{lot.lotNumber}}
+        </ng-container>
+
+        <ng-container *aidSubTableColDef="let lot = row; header: 'Asset Description'">
+          {{lot.assetDescription}}
+        </ng-container>
+
+        <ng-container *aidSubTableColDef="let lot = row; header: 'Buyer'">
+          {{lot.buyerFullName}}
+        </ng-container>
+
+        <ng-container *aidSubTableColDef="let lot = row; header: 'Phone'">
+          {{lot.buyerPhone}}
+        </ng-container>
+
+        <ng-container *aidSubTableColDef="let lot = row; header: 'Email'">
+          {{lot.buyerEmail}}
+        </ng-container>
+
+        <ng-container *aidSubTableColDef="let lot = row; header: 'Email'">
+          {{lot.buyerEmail}}
+        </ng-container>
+
+        <ng-container *aidSubTableColDef="let lot = row; header: 'Bidder Number';">
+          <div class="row-container">
+            {{lot.bidderNumber}}
+          </div>
+        </ng-container>
+
+        <ng-container *aidSubTableColDef="let lot = row; header: 'Issue';">
+          <div class="row-container">
+            {{lot.issue}}
+          </div>
+        </ng-container>
+
+      </aid-sub-table>
+    </ng-container>
+    <!-- END: Line Items Expanded Row Definition -->
+
+    <ng-content *ngIf="enableRowAction"></ng-content>
+  </aid-data-table>
+</div>
