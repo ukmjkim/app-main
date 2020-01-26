@@ -1,0 +1,22 @@
+<aid-page-simple class="page-simple" [fullWidth]="true" [pageTitle]="pageTitle" [pageInfo]="pageInfo"
+    *ngIf="appMainState">
+    <ng-container ngProjectAs="headerActionButton">
+        <div class="text-right">
+            <button id="add-new-item" class="btn btn-primary mb-1 add-button" (click)="addContentData()" [disabled]="!isWritable()">Add</button>
+        </div>
+    </ng-container>
+    <div class="card-body" *ngIf="appMainState">
+      <aid-content-data-table *ngIf="appMainState"
+        id="employee-table"
+        header="Content Data"
+        [appMainState]="appMainState"
+        [contentDataType]="contentDataType"
+        [items]="items"
+        (editRow)="editContentData($event)"
+        (deleteRow)="deleteContentData($event)"
+        (assignWorkHoursRow)="assignWorkHoursToWorkShift($event)"
+        (assignBagsRow)="assignBagsToReleaseOrder($event)"
+      >
+      </aid-content-data-table>
+    </div>
+</aid-page-simple>

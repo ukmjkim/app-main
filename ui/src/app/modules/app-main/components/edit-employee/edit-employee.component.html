@@ -1,0 +1,56 @@
+<aid-page-simple class="page-simple" [fullWidth]="true" [hidePageInfo]="true" *ngIf="appMainState">
+  <ng-container ngProjectAs="breadCrumb">
+    <div class="t-link">
+      <i class="fa fa-chevron-left mr-2"></i>
+      <a (click)="returnToList()">Return to List</a>
+    </div>
+  </ng-container>
+  <ng-container ngProjectAs="headerAdditionalActions">
+    <div class="aid--header-action ml-4" (click)="openSellerCostPrintForm()">
+      <i class="fa fa-print"></i>
+      <span>Contract Info</span>
+    </div>
+    <div class="aid--header-action ml-4" (click)="openSellerCostPrintForm()">
+      <i class="fa fa-print"></i>
+      <span>Print Cost Sheet</span>
+    </div>
+  </ng-container>
+
+  <ng-container ngProjectAs="customPageTitle">
+    {{employee?.ownerCode}} - {{employee?.seller.companyName}}
+    <span class="font-size-16">({{employee?.salesHubContractId}})</span>
+  </ng-container>
+
+  <ng-container ngProjectAs="headerActionButton">
+    <span class="mr-2 t-link" *ngIf="this.employeeSearchDtoListCursor > 0" (click)="navigatePage(this.employeeSearchDtoList[this.employeeSearchDtoListCursor-1].id)">
+      <i class="fa fa-chevron-left mr-2"></i>Prev
+    </span>
+    {{this.employeeSearchDtoListCursor+1}} / {{this.employeeSearchDtoList.length}}
+    <span class="ml-2 t-link" *ngIf="this.employeeSearchDtoListCursor < this.employeeSearchDtoList.length-1" (click)="navigatePage(this.employeeSearchDtoList[this.employeeSearchDtoListCursor+1].id)">
+      Next
+      <i class="fa fa-chevron-right ml-2"></i>
+    </span>
+  </ng-container>
+
+
+  <mat-tab-group dynamicHeight="true">
+    <mat-tab label="Contract Details">
+      <ng-template matTabContent>
+        <aid-edit-employee-details *ngIf="appMainState" id="{{id}}-employee-details"
+          [appMainState]="appMainState"
+          [employee]="employee"
+          [employeeAuctionList]="employeeAuctionList">
+        </aid-edit-employee-details>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+
+  <ng-container ngProjectAs="footerActions">
+    <aid-employee-action [appMainState]="appMainState" [employee]="employee"></aid-employee-action>
+  </ng-container>
+
+  <ng-container ngProjectAs="pageFloatingPanel">
+    <aid-slide-panel id="item-form" *ngIf="showCostDialog" [bottom]="0" #CostPanel>
+    </aid-slide-panel>
+  </ng-container>
+</aid-page-simple>

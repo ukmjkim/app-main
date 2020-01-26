@@ -1,0 +1,33 @@
+.dashboard--statuses-contract {
+    display: grid;
+    grid-template-columns: 1.6fr minmax(200px, 1.2fr) minmax(200px, 0.8fr);
+    grid-template-areas: "chart statuses supplemental";
+}
+
+.statuses--contract-chart{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "chartcontainer";
+  justify-items: center;
+  align-items: stretch;
+  justify-self: center;
+}
+
+.statuses--chart-item {
+  grid-area: chartcontainer;
+  max-width: 420px;
+  padding: 30px;
+  height: 100%;
+}
+
+.statuses--contract-count {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  grid-area: chartcontainer;
+  align-self: center;
+}

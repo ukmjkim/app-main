@@ -1,0 +1,34 @@
+<div class="detail--header mt-3">
+    <div class="detail-header--meta-card s-grey">
+        <div>
+            <div>
+                <h3 class="so-header--vendor">Name</h3>
+            </div>
+        </div>
+        <div class="detail-header--meta">
+            <div class="contract-info">
+                <label>Contract Type</label>
+                <label>Territory Manager</label>
+                <label>RASC</label>
+                <div>Multi-Channel Straight Commission</div>
+                <div>{{employee?.seller.fullName}}</div>
+                <div>Pan He</div>
+            </div>
+        </div>
+        <div class="detail-header--badges">
+            <span class="pill s-light-grey">Active</span>
+            <span class="pill s-light-grey">Signed</span>
+        </div>
+    </div>
+</div>
+
+<aid-employee-details-dashboard id="edit-employee-details-dashboard" *ngIf="appMainState && employee"
+  [appMainState]="appMainState">
+</aid-employee-details-dashboard>
+
+<aid-page-content-card class="mt-3" *ngIf="appMainState && employee">
+    <div class="row my-2">
+        <div class="col">
+        </div>
+    </div>
+</aid-page-content-card>

@@ -1,0 +1,321 @@
+@import "~@ukmjkim/aid-ux-components/scss/colors";
+@import "~@ukmjkim/aid-ux-components/scss/breakpoints";
+
+$almost-white: #f9f9f9;
+
+:host {
+    display: grid;
+    min-height: 0;
+}
+
+@mixin md-icon-size($size: 24px) {
+    font-size: $size;
+    height: $size;
+    width: $size;
+}
+
+.mat-icon {
+    @include md-icon-size(24px);
+}
+
+.btn {
+  font-size: 16px !important;
+  padding: 5px 20px !important;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 2px solid rgba(0,0,0,0.125);
+  border-radius: .25rem;
+}
+
+.mr-1 {
+  margin-right: 5px;
+}
+
+.card-header {
+  padding: 12px 20px;
+  font-size: 20px;
+  margin: 0;
+  background-color: rgba(0,0,0,0.03);
+  border-bottom: 2px solid rgba(0,0,0,0.125);
+}
+
+.card-header:first-child {
+  border-radius: calc(.25rem - 2px) calc(.25rem - 2px) 0 0;
+}
+
+.card-body {
+  background-color: white;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,0.2), 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12);
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + .75rem + 4px);
+  padding: .375rem .75rem;
+  font-size: .9375rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 2px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out;
+}
+
+
+.col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.col-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.form-control:hover:not(:disabled) {
+  box-shadow: 0 0 8px rgba(0,114,194,0.5);
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px;
+}
+
+.form-row>.col, .form-row>[class*="col-"] {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.input-value {
+  grid-area: value;
+  font-weight: 700;
+}
+
+
+// Radio Button style as button - START
+.switch-field {
+  overflow: hidden;
+  display: flex;
+  border: 2px solid transparent;
+  height: 35px;
+  box-shadow: 0 0 0 2px palette(grey, 2);
+  border-radius: 4px;
+  position: relative;
+
+  &:focus-within {
+    box-shadow: 0 0 0 2px palette(blue);
+  }
+}
+
+.switch-field input {
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  width: 1px;
+  border: 0;
+  overflow: hidden;
+}
+
+.switch-field label {
+  float: left;
+}
+
+.switch-field label,
+.switch-field div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  margin: 0;
+  background-color: #fff;
+  color: palette(blue);
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: none;
+  padding: 0 14px;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+
+  &.switch-danger {
+    color: palette(red);
+  }
+
+  &:not(:last-child) {
+    border-right: 1px solid #ddd;
+  }
+}
+
+.switch-field div label {
+  height: 100%;
+}
+
+.switch-field div,
+.switch-field div label {
+  padding: 0;
+}
+
+.switch-field input:checked + label {
+  background-color: palette(blue);
+  color: #fff;
+
+  &.switch-danger {
+    background-color: palette(red);
+  }
+}
+
+.switch-field label:first-of-type {
+  border-radius: 2px 0 0 2px;
+}
+
+.switch-field label:last-of-type {
+  border-radius: 0 2px 2px 0;
+}
+// Radio Button style as button - END
+
+
+.form-control {
+  &:hover:not(:disabled) {
+    box-shadow: 0 0 8px rgba(palette(blue), 0.5);
+  }
+
+  &:focus {
+    border-color: palette(blue) !important;
+  }
+}
+
+.form-check-input {
+  position: static;
+}
+
+.mat-chip.mat-standard-chip.mat-primary,
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+  background-color: #0072c2;
+  color: #fff;
+}
+
+.mat-chip.mat-standard-chip.mat-primary .mat-chip-remove,
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-primary .mat-chip-remove {
+  color: #fff;
+  opacity: 0.8;
+}
+
+.input-group-append.select-append {
+  position: relative;
+
+  select {
+    border: none;
+    min-width: 80px;
+
+    &:disabled {
+      background-color: palette(grey, 1);
+      border: none;
+    }
+  }
+
+  &:before {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid #e4e7ea;
+    border-radius: 0 0.25rem 0.25rem 0;
+  }
+
+  &:focus-within:before {
+    border-color: palette(blue);
+  }
+}
+
+//For the disabled and "glance-able" inputs, slightly different styles for the selects
+.form-control:disabled + .select-append:before {
+  border: none;
+}
+
+.form-control.glanceable-input + .select-append select {
+  background-color: palette(blue, 1);
+}
+
+.form-control.fake-input-disabled {
+  height: 36px;
+  background-color: #e0e7e9;
+}
+
+.input-row {
+  display: grid;
+  grid-template-areas: "label" "value";
+  grid-template-columns: 1fr 2fr 45px;
+  grid-template-rows: auto auto;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 5px 0;
+
+  &.input-row-no-border-bottom {
+    border-bottom: none;
+  }
+
+  @include breakpoint(m) {
+    grid-template-areas: "label value";
+    grid-template-columns: 1fr 2fr 45px;
+    grid-template-rows: auto auto;
+
+    padding: 10px 0;
+  }
+}
+
+.input-label {
+  grid-area: label;
+  padding-right: 10px;
+}
+
+.input-value {
+  grid-area: value;
+  font-weight: 700;
+}
+
+.row-no-border-bottom {
+  .verification-row,
+  .aid--input-row {
+    border-bottom: none !important;
+  }
+}
+
+button {
+  outline: none !important;
+}
+
+.btn-text-only {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  font-size: inherit;
+}
+
+.input-group-middle {
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+}

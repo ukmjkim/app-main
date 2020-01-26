@@ -1,0 +1,65 @@
+@import "~@ukmjkim/aid-ux-components/scss/colors";
+@import "~@ukmjkim/aid-ux-components/scss/breakpoints";
+
+:host {
+  display: grid;
+  min-height: 0;
+}
+
+/* Styles for tab labels */
+.mat-tab-label {
+  min-width: 25px !important;
+  padding: 5px;
+  background-color: transparent;
+  color: palette(brand);
+  font-weight: 700;
+  width: 200px;
+}
+
+/* Styles for the active tab label */
+.mat-tab-label.mat-tab-label-active {
+  min-width: 25px !important;
+  padding: 5px;
+  background-color: transparent;
+  color: palette(brand);
+  font-weight: 700;
+}
+
+/* ink bar style */
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+  background: palette(brand);
+  height: 3px;
+  width: 200px;
+}
+
+.btn--count-indicator--contract {
+  position: absolute;
+  height: 1.5em;
+  min-width: 1.5em;
+  top: 0;
+  right: 0;
+  transform: translate(-100%, 60%);
+  border-radius: 50%;
+  background-color: palette(red);
+  color: white;
+  box-shadow: $aid-shadow;
+}
+
+.pill-for-seller-contract {
+  font-size: 14px;
+}
+
+.aid--header-action {
+  display: inline-block;
+  font-weight: 700;
+  color: palette(grey,4);
+  cursor: pointer;
+
+  &:hover{
+    color: palette(blue);
+  }
+
+  & i{
+    margin-right: 10px;
+  }
+}

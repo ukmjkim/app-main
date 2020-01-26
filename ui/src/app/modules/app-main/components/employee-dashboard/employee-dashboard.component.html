@@ -1,0 +1,45 @@
+<aid-page-simple [pageTitle]="'Contracts Dashboard'">
+  <aid-page-content-card [cardTitle]="contractStats ? (contractStats.total + ' Contracts') : ''">
+    <ng-container ngProjectAs="headerSubContent">
+      <aid-search-input class="mr-3">
+        <input id="event-po-search-input" type="text" class="form-control font-size-14 font-weight-normal my-0 py-1" placeholder="Search Contracts"
+          aria-describedby="basic-addon1" #searchInputBox (keyup.enter)="keyEnter($event, searchInputBox.value)">
+        <button id="event-po-search-button" class="btn btn-primary font-size-14 text-transform-none" (click)="openEmployeeSearchByKeyword(searchInputBox.value)">Search</button>
+      </aid-search-input>
+      <a id="refresh-event-po-stats" (click)="refresh()" class="thumbnail-view-button mat-elevation-z3">
+        <mat-icon matTooltip="Refresh">refresh</mat-icon>
+      </a>
+    </ng-container>
+
+    <div class="dashboard--statuses-contract">
+      <div class="statuses--contract-chart">
+        <canvas class="statuses--chart-item" id="canvasStats" height="300" width="300">{{ contractChart }}</canvas>
+        <div class="font-grey center-over statuses--chart" [hidden]="isDataReady()">
+          <mat-progress-spinner [mode]="'indeterminate'" [diameter]="30"></mat-progress-spinner>
+        </div>
+        <figure class="statuses--contract-count" *ngIf="contractStats">
+          <h1 (click)="openEmployeeSearch('')">{{contractStats?.total | number}}</h1>
+          <h3 (click)="openEmployeeSearch('')">Contracts</h3>
+        </figure>
+      </div>
+      <div class="statuses--lifecycle">
+        <div class="supplemental-twoup">
+          <ng-container *ngFor="let contractType of contractDashboardTypes">
+            <aid-dashboard-stat [label]="contractType.label" [value]="getEmployeeCountByType(contractType.name) | number" [colorCode]="contractType.dashboardColor"
+              (click)="openEmployeeSearchByContractType(contractType.label)">
+            </aid-dashboard-stat>
+          </ng-container>
+        </div>
+      </div>
+      <div class="statuses--supplemental">
+        <div class="supplemental-one">
+          <ng-container *ngFor="let contractType of contractDashboardTypesSigned">
+            <aid-dashboard-stat [label]="contractType.label" [value]="getEmployeeCountByType(contractType.name) | number" [colorCode]="contractType.dashboardColor"
+            (click)="openEmployeeSearchByContractStatus(contractType.label)">
+            </aid-dashboard-stat>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </aid-page-content-card>
+</aid-page-simple>

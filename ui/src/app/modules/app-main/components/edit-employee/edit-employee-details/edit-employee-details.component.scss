@@ -1,0 +1,95 @@
+@import "~@ukmjkim/aid-ux-components/scss/colors";
+@import "~@ukmjkim/aid-ux-components/scss/breakpoints";
+
+
+.detail--header {
+  margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: "meta" "." "." ".";
+  grid-gap: 15px;
+
+  @include breakpoint(s) {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "meta meta meta" ". . .";
+  }
+
+  @include breakpoint(m) {
+    grid-template-columns: 1fr;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    grid-template-areas: "meta . . .";
+  }
+}
+
+.detail-header--meta-card {
+  @include colors;
+  background-color: var(--active-color);
+  color: var(--active-text-color);
+  grid-area: meta;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "vendor button" "content content";
+  border-radius: 8px;
+  box-shadow: $aid-shadow;
+  padding: 15px;
+}
+
+.detail-header--vendor {
+  grid-area: vendor;
+}
+
+.detail-header--meta {
+  grid-area: content;
+}
+
+.detail-header--badges {
+  padding: 0px 10px;
+}
+
+.pill {
+  @include colors;
+  background-color: var(--active-color);
+  color: var(--active-text-color);
+  padding: 0 10px;
+  border-radius: 13px;
+  font-weight: 700;
+  line-height: 25px;
+  height: 25px;
+  display: inline-block;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.contract-info {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto;
+
+  label {
+    opacity: 0.5;
+    margin-bottom: 5px;
+  }
+}
+
+.seller-contract-confidential {
+  @include colors;
+  background-color: var(--active-color);
+  color: var(--active-text-color);
+  padding: 15px 15px 5px;
+  border-radius: 8px;
+  font-weight: 700;
+  width: 110px;
+  border: 1px solid palette(red);
+
+  label {
+    opacity: 0.8;
+    margin-bottom: 5px;
+  }
+
+  figure {
+    font-size: textsize(400);
+  }
+}

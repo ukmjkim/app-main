@@ -1,0 +1,249 @@
+@import "~@ukmjkim/aid-ux-components/scss/colors";
+@import "~@ukmjkim/aid-ux-components/scss/breakpoints";
+
+$almost-white: #f9f9f9;
+
+.table-container {
+  margin-left: 70px;
+}
+
+.row-container {
+  font-size: 14px;
+}
+
+::ng-deep .mat-sort-header-container {
+  height: 36px;
+  padding-left: 8px;
+}
+
+.page-title-issues {
+  color: #e2411b;
+}
+
+.row-count {
+  display: inline-block;
+  width: 160px;
+}
+
+.toolbar {
+  text-align: right;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.mat-row:hover {
+  background-color: $almost-white;
+}
+
+.filter-header {
+  background-color: #ababab;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.filter-header .mat-input-wrapper {
+  padding-bottom: 0;
+}
+
+.filter-header .mat-form-field-infix {
+  padding: 10px 0 10px 0;
+  border: 0px;
+}
+
+.filter-header .mat-input-underline {
+  display: none !important;
+}
+
+.filter-header button:focus {
+  outline: none;
+}
+
+.filter-header .mat-button {
+  margin: 0;
+  padding: 0;
+  line-height: 32px;
+  width: 100%;
+}
+
+mat-row mat-cell {
+  margin-left: 2px;
+}
+
+.footer {
+  width: 100%;
+  z-index: 210;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.mat-paginator {
+  background-color: #efefef;
+}
+
+.no-sort-header {
+  display: block;
+  padding-bottom: 18px;
+}
+
+.filter-header .mat-form-field,
+.filter-header .shootPriceButton {
+  margin-bottom: 1px;
+}
+
+.toggle-advanced-search {
+  color: #0072c2 !important;
+  background: #fff;
+  padding: 4px;
+  display: inline-block;
+  border-radius: 32px;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.thumbnail-view-button {
+  color: #0072c2 !important;
+  background: #fff;
+  padding: 4px;
+  display: inline-block;
+  border-radius: 32px;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+aid-data-table-column-selector {
+  cursor: pointer;
+
+  mat-icon {
+    color: #0072c2 !important;
+  }
+}
+
+.selection-text {
+  padding-bottom: 5px;
+  font-size: 14px;
+}
+
+.data-table--header {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-template-areas: "title toolbar" "search search";
+  grid-gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+
+  @include breakpoint(m) {
+    grid-template-areas: "title search toolbar";
+  }
+}
+
+.header--title {
+  grid-area: title;
+  font-size: 18px;
+}
+
+.header--search {
+  grid-area: search;
+
+  @include breakpoint(m) {
+    width: 350px;
+  }
+}
+
+.form-control {
+  font-size: 14px !important;
+}
+
+.input-group-text {
+  font-size: 15px !important;
+}
+
+.header--toolbard {
+  grid-area: toolbar;
+}
+
+.form-control-search-box {
+  font-weight: normal;
+  font-size: 13px;
+  border: 1px solid #ced4da;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+
+.second-row {
+  color: palette(grey,3);
+}
+
+.register-button {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.lines--footer{
+  display: grid;
+  grid-template-columns: 1fr auto 95px 95px 95px 175px;
+}
+
+.item-credit {
+  color: palette(red);
+  font-weight: 700;
+}
+
+.item-data {
+  color: black;
+}
+
+.shorten-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tooltip container */
+.tooltip {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

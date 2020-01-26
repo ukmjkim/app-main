@@ -1,0 +1,389 @@
+<div class="data-table--header">
+  <h3 class="header--title">{{dataSource?.rowCount() | async}} Items</h3>
+  <aid-search-input class="header--search" [icon]="'fa-filter'" [showButton]="false">
+    <input [(ngModel)]="searchString" class="form-control" (keyup)="applyFilterByString()" placeholder="Filter Items">
+  </aid-search-input>
+
+  <div class="header--toolbar">
+    <ng-content select="actionButtons"></ng-content>
+    <ng-container *ngIf="contentDataType === ContentDataType.Bag">
+      <a id="export-to-excel-button" (click)="exportToExcel()" class="thumbnail-view-button mat-elevation-z3">
+        <mat-icon matTooltip="Export to Excel">save_alt</mat-icon>
+      </a>
+    </ng-container>
+  </div>
+</div>
+
+<div ngif="appMainState && dataSource && columnsToShow && columnsToShow.length > 0">
+  <aid-data-table #table id="{{id}}-datatable" [dataSource]="dataSource" [displayedColumns]="columnsToShow" [multisort]="true"
+    [dateFormat]="dateFormat" [enableSelection]="true" [showExpandToggle]="false" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+    [clickable]="false">
+
+    <ng-container *aidColDef="COLUMNS.column_account_number.field; let row = row; header: 'Account Number'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.accountNumber}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_accounting_manager_id.field; let row = row; header: 'Accounting Manager#'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.accountingManagerId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_accounting_manager.field; let row = row; header: 'Accounting Manager'; width: '300px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.keyAccountingManager}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_acres.field; let row = row; header: 'Acres'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.acres}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_action.field; let row = row; header: 'Action'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.action}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_bag_id.field; let row = row; header: 'Bag#'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.bagId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_bag.field; let row = row; header: 'Bag'; width: '300px'; headerType: ColHeaderTypeEnum.SORTABLE">
+        <div class="row-container">{{row.keyBag}}</div>
+      </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_created_dt.field; let row = row; header: 'Created On'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.createdDateTime | date:'short':'UTC'}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_contact_id.field; let row = row; header: 'Customer#'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.contactId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_contact.field; let row = row; header: 'Customer'; width: '300px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.keyContact}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_desired_moisture.field; let row = row; header: 'Desired Moisture'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.desiredMoisture}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_downtime_end_dt.field; let row = row; header: 'Downtime End'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.downtimeEndDateTime | date:'short':'UTC'}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_downtime_start_dt.field; let row = row; header: 'Downtime Start'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.downtimeStartDateTime | date:'short':'UTC'}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_dropoff_datetime.field; let row = row; header: 'Dropoff'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.dropoffDateTime | date:'short':'UTC'}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_dry_weight.field; let row = row; header: 'Dry Weight'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.dryWeight}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_dryer_id.field; let row = row; header: 'Dryer#'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.dryerId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_dryer.field; let row = row; header: 'Dryer Name'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+        <div class="row-container">{{row.keyDryer}}</div>
+      </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_drying_datetime.field; let row = row; header: 'Drying Date'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.dryingDateTime | date:'short':'UTC'}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_drying_order_id.field; let row = row; header: 'Drying Order#'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.dryingOrderId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_drying_order.field; let row = row; header: 'Drying Order'; width: '300px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.keyDryingOrder}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_drying_time.field; let row = row; header: 'Drying Time'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.dryingTime}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_dryshop_manager_id.field; let row = row; header: 'Dryshop Manager#'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.dryshopManagerId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_dryshop_manager.field; let row = row; header: 'Dryshop Manager'; width: '300px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.keyDryshopManager}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_email.field; let row = row; header: 'Email'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.email}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_employee_id.field; let row = row; header: 'Employee#'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.employeeId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_employee.field; let row = row; header: 'Employee'; width: '300px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.keyEmployee}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_farm_id.field; let row = row; header: 'Farm#'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.farmId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_farm_name.field; let row = row; header: 'Farm'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.farmName}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_farm.field; let row = row; header: 'Farm Name'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.keyFarm}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_first_name.field; let row = row; header: 'First Name'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.firstName}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_home_phone.field; let row = row; header: 'Home Phone'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.homePhone}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_id.field; let row = row; header: 'Id'; width: '50px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.id}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_in_warehouse_dt.field; let row = row; header: 'In Warehouse'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.inWarehouseDateTime | date:'short':'UTC'}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_is_active.field; let row = row; header: 'Active'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">
+        <div *ngIf="row.isActive" fxLayout="row" fxLayoutAlign="start center"><mat-icon class="text-success">check_circle_outline</mat-icon></div>
+        <div *ngIf="!row.isActive" fxLayout="row" fxLayoutAlign="start center"><mat-icon class="text-danger">highlight_off</mat-icon></div>
+      </div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_is_chop_needed.field; let row = row; header: 'Chop Needed'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">
+        <div *ngIf="row.isChopNeeded" fxLayout="row" fxLayoutAlign="start center"><mat-icon class="text-success">check_circle_outline</mat-icon></div>
+        <div *ngIf="!row.isChopNeeded" fxLayout="row" fxLayoutAlign="start center"><mat-icon class="text-danger">highlight_off</mat-icon></div>
+      </div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_is_test_passed.field; let row = row; header: 'Test Passed'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">
+        <div *ngIf="row.isTestPassed" fxLayout="row" fxLayoutAlign="start center"><mat-icon class="text-success">check_circle_outline</mat-icon></div>
+        <div *ngIf="!row.isTestPassed" fxLayout="row" fxLayoutAlign="start center"><mat-icon class="text-danger">highlight_off</mat-icon></div>
+      </div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_lab_supervisor_id.field; let row = row; header: 'Lab Supervisor#'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.labSupervisorId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_lab_supervisor.field; let row = row; header: 'Lab Supervisor'; width: '300px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.keyLabSupervisor}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_lab_technician_id.field; let row = row; header: 'Lab Technician#'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.labTechnicianId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_lab_technician.field; let row = row; header: 'Lab Technician'; width: '300px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.keyLabTechnician}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_last_name.field; let row = row; header: 'Last Name'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.lastName}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_login_name.field; let row = row; header: 'Login Name'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.loginName}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_mobile_phone.field; let row = row; header: 'Mobile Phone'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.mobilePhone}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_moisture.field; let row = row; header: 'Moisture'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.moisture}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_linked_moisture.field; let row = row; header: 'Moisture'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.testedMoisture}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_total_bags.field; let row = row; header: '# of Bags'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.totalBags}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_total_weight.field; let row = row; header: 'Dry Weight(lb)'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.totalWeight}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_name.field; let row = row; header: 'Name'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.name}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_note.field; let row = row; header: 'Note'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.note}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_oda_license_number.field; let row = row; header: 'ODA License Number'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.odaLicenseNumber}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_office_phone.field; let row = row; header: 'Office Phone'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.officePhone}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_password.field; let row = row; header: 'Password'; width: '150px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.password}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_phone.field; let row = row; header: 'Phone'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.phone}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_product_breed.field; let row = row; header: 'Product Breed'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.productBreed}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_production_manager_id.field; let row = row; header: 'Production Manager#'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.productionManagerId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_production_manager.field; let row = row; header: 'Production Manager'; width: '300px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.keyProductionManager}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_production_supervisor_id.field; let row = row; header: 'Production Supervisor#'; width: '300px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.productionSupervisorId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_production_supervisor.field; let row = row; header: 'Production Supervisor'; width: '300px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.keyProductionSupervisor}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_reason.field; let row = row; header: 'Reason'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.reason}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_release_order_id.field; let row = row; header: 'Release Order#'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.releaseOrderId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_release_order.field; let row = row; header: 'Release Order#'; width: '400px'; headerType: ColHeaderTypeEnum.SORTABLE">
+        <div class="row-container">{{row.keyReleaseOrder}}</div>
+      </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_role_id.field; let row = row; header: 'Role#'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.roleId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_role.field; let row = row; header: 'Role Name'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.keyRole}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_room_moisture.field; let row = row; header: 'Room Moisture'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.roomMoisture}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_room_temperature.field; let row = row; header: 'Room Temperature'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.roomTemperature}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_sale_manager_id.field; let row = row; header: 'Sale Manager#'; width: '300px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.saleManagerId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_sale_manager.field; let row = row; header: 'Sale Manager Name'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.keySaleManager}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_sample.field; let row = row; header: 'Sample'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.sample}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_shift_name.field; let row = row; header: 'Shift Name'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.shiftName}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_shipping_dt.field; let row = row; header: 'Shipping DateTime'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.shippingDateTime | date:'short':'UTC'}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_status.field; let row = row; header: 'Status'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.status}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_storage_zone.field; let row = row; header: 'Storage Zone'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.storageZone}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_tag_color.field; let row = row; header: 'Tag Color'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.tagColor}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_test_dt.field; let row = row; header: 'Test DateTime'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.testDateTime | date:'short':'UTC'}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_testing_temperature.field; let row = row; header: 'Testing Temperature'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.testingTemperature}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_truck_license_plate.field; let row = row; header: 'Truck License Plate'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.truckLicensePlate}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_warehouse_handler_id.field; let row = row; header: 'Warehouse Handler#'; width: '100px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.warehouseHandlerId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_warehouse_handler.field; let row = row; header: 'Warehouse Handler'; width: '300px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.keyWarehouseHandler}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_weight_after_drying.field; let row = row; header: 'Weight After Drying'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.weightAfterDrying}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_weight_before_drying.field; let row = row; header: 'Weight Before Drying'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.weightBeforeDrying}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_work_date.field; let row = row; header: 'Work Date'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.workDate}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_work_shift_id.field; let row = row; header: 'Work Shift#'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.workShiftId}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_key_work_shift.field; let row = row; header: 'Work Shift Name'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+        <div class="row-container">{{row.keyWorkShift}}</div>
+      </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_worked_hours.field; let row = row; header: 'Worked Hours'; width: '200px'; headerType: ColHeaderTypeEnum.SORTABLE">
+      <div class="row-container">{{row.workedHours}}</div>
+    </ng-container>
+
+    <ng-container *aidColDef="COLUMNS.column_actions.field; let row = row; header: ''; width: '50px';">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_horiz</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="assignBagsItem(row)" *ngIf="contentDataType === ContentDataType.ReleaseOrder">
+          <mat-icon>assignment</mat-icon>
+          <span>Assign Bags</span>
+        </button>
+        <button mat-menu-item (click)="assignWorkHoursItem(row)" *ngIf="contentDataType === ContentDataType.WorkShift">
+          <mat-icon>assignment</mat-icon>
+          <span>Assign Work Hours</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="editItem(row)">
+          <mat-icon>save_alt</mat-icon>
+          <span>Edit Item</span>
+        </button>
+      </mat-menu>
+    </ng-container>
+
+  </aid-data-table>
+</div>
