@@ -1,0 +1,35 @@
+{
+  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+  "lib": {
+    "entryFile": "src/public-api.ts",
+    "styleIncludePaths": ["src/styles.scss"],
+    "umdModuleIds": {
+      "ng2-dragula": "ng2Dragula",
+      "moment": "momentImported",
+      "ng2-nouislider": "ng2Nouislider",
+      "util": "util"
+    }
+  },
+  "whitelistedNonPeerDependencies": [
+    "@angular/flex-layout",
+    "@fortawesome/angular-fontawesome",
+    "core-js",
+    "zone",
+    "font-awesome",
+    "hammerjs",
+    "ng2-dragula",
+    "angular2-fontawesome",
+    "nouislider",
+    "localforage",
+    "@ng-select/ng-select",
+    "angular2-csv",
+    "chart.js",
+    "angular-calendar",
+    "angularx-flatpickr",
+    "date-fns",
+    "flatpickr",
+    "@ukmjkim/aid-ux-components",
+    "@ukmjkim/aid-lib-services",
+    "@ukmjkim/aid-data-table"
+  ]
+}
