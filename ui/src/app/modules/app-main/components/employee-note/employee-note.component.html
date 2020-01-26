@@ -1,0 +1,53 @@
+<div class="aid--modal">
+  <div class="modal--header">
+    <h3>Pickup Notes</h3>
+    <div class="header-action" *ngIf="!isAddNoteEnabled">
+      <button id="btn-add-new-note" type="button" class="btn btn-outline-primary flat-btn btn-details" (click)="enableAddNote()"
+        [disabled]="!isWritable()">Add a Note
+      </button>
+    </div>
+
+    <div class="header-subhead notes--create" *ngIf="isAddNoteEnabled">
+      <textarea #noteInput id="title-note" rows="1" class="form-control create--content" placeholder="Note Content (400 characters maximum)"
+        maxlength="{{MAX_TEXT_LENGTH}}" [(ngModel)]="employeeNote" name="note-info"></textarea>
+      <button id="add-note" type="button" class="btn btn-primary create--add" (click)="addNote()">Save</button>
+      <button id="cancel-add-note" type="button" class="btn btn-light create--cancel" (click)="cancelNote()">Cancel
+      </button>
+    </div>
+  </div>
+
+  <div class="modal--body">
+    <div id="title-note-data-table" #noteDataTable>
+      <aid-data-table #table [dataSource]="dataSource" [displayedColumns]="columnsToShow" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        [minWidthPx]="800" [clickable]="false">
+
+        <ng-container *aidColDef="columns.id.field;
+                  let row = row;
+                  header: '#';
+                  width: '70px';
+                  headerType: ColHeaderTypeEnum.SORTABLE">
+          <span id="line-number-{{row.noteInfoId}}">{{row.id ? row.id : ''}}</span>
+        </ng-container>
+
+        <ng-container *aidColDef="columns.noteInfo.field;
+                  let row = row;
+                  header: 'Note';
+                  headerType: ColHeaderTypeEnum.SORTABLE">
+          <span id="noteInfo-{{row.noteInfoId}}">{{row.noteInfo}}</span>
+        </ng-container>
+
+        <ng-container *aidColDef="columns.created.field;
+                  let row = row;
+                  header: 'Created';
+                  width: '250px';
+                  headerType: ColHeaderTypeEnum.SORTABLE">
+          <span id="date-{{row.titleIssueId}}">{{row.created}}</span>
+        </ng-container>
+
+      </aid-data-table>
+    </div>
+  </div>
+  <div class="modal--footer">
+    <button class="btn btn-primary footer-primary" (click)="onClose()" [disabled]="isAddNoteEnabled">Done</button>
+  </div>
+</div>

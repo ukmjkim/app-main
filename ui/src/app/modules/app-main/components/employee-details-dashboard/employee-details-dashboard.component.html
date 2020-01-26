@@ -1,0 +1,114 @@
+<div class="two-page-cards">
+  <aid-page-content-card [cardTitle]="contractStats ? (contractStats.total + ' Contracts') : ''">
+    <ng-container ngProjectAs="headerSubContent">
+      <h6>Sales Order: 8714889</h6>
+    </ng-container>
+
+    <div class="dashboard--statuses-contract">
+      <div class="statuses--contract-chart">
+        <canvas class="statuses--chart-item" id="canvasStats" height="300" width="300">{{ contractChart }}</canvas>
+        <div class="font-grey center-over statuses--chart" [hidden]="isChartReady()">
+          <mat-progress-spinner [mode]="'indeterminate'" [diameter]="30"></mat-progress-spinner>
+        </div>
+        <figure class="statuses--contract-count" *ngIf="contractStats">
+          <h1 (click)="openEmployee('')">11</h1>
+          <h3 (click)="openEmployee('')">Assets in Sale</h3>
+        </figure>
+      </div>
+      <div class="statuses--lifecycle">
+        <div class="supplemental-one">
+            <aid-dashboard-stat [label]="'Pre-Sale / Selling'" [value]="8" [colorCode]="'#15427C'">
+              <div class="pills-two-lines">
+                <div class="pill s-orange m-1">
+                  <strong>5 with Issues</strong>
+                </div>
+                <div class="pill s-orange m-1">
+                  <strong>5 with R&amp;R</strong>
+                </div>
+              </div>
+            </aid-dashboard-stat>
+            <aid-dashboard-stat [label]="'Sold'" [value]="2" [colorCode]="'#1B7D42'">
+              <div class="pills-two-lines">
+                <div class="pill s-orange m-1">
+                  <strong>1 with Issues</strong>
+                </div>
+                <div class="pill s-orange m-1">
+                  <strong>1 Paid</strong>
+                </div>
+              </div>
+            </aid-dashboard-stat>
+            <aid-dashboard-stat [label]="'Not Sold'" [value]="1" [colorCode]="'#DA461F'"></aid-dashboard-stat>
+        </div>
+      </div>
+    </div>
+  </aid-page-content-card>
+
+  <aid-page-content-card>
+    <aid-dashboard-stat [label]="'Assets With R&R'" [value]="2" [colorCode]="'#f16913'">
+      <div class="pills-two-lines">
+        <div class="pill s-blue m-1">
+          <strong>1 in Process</strong>
+        </div>
+        <div class="pill s-green m-1">
+          <strong>1 Ready for QC</strong>
+        </div>
+      </div>
+    </aid-dashboard-stat>
+    <div class="mt-4">
+      <div class="contract-budget-grid s-grey">
+        <div class="contract-budget-detail-grid">
+          <div>R&amp;R BUDGET</div>
+          <div class="text-right"></div>
+        </div>
+      </div>
+      <div class="contract-budget-grid s-grey">
+        <div class="contract-budget-detail-grid">
+          <div class="pl-2">Roll Up:</div>
+          <div class="text-right">12,500</div>
+          <div class="pl-2">NTE:</div>
+          <div class="text-right">15,000</div>
+        </div>
+      </div>
+      <div class="contract-budget-grid s-grey">
+        <div class="contract-budget-detail-grid">
+          <div>Committed</div>
+          <div class="text-right">4,500</div>
+        </div>
+      </div>
+      <div class="contract-budget-grid s-grey">
+        <div class="contract-budget-detail-grid">
+          <div>Remaining</div>
+          <div class="text-right">8,000</div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <div class="contract-budget-grid s-grey">
+        <div class="contract-budget-detail-grid">
+          <div>HAULING BUDGET</div>
+          <div class="text-right"></div>
+        </div>
+      </div>
+      <div class="contract-budget-grid s-grey">
+        <div class="contract-budget-detail-grid">
+          <div class="pl-2">Roll Up:</div>
+          <div class="text-right">12,500</div>
+          <div class="pl-2">NTE:</div>
+          <div class="text-right">15,000</div>
+        </div>
+      </div>
+      <div class="contract-budget-grid s-grey">
+        <div class="contract-budget-detail-grid">
+          <div>Committed</div>
+          <div class="text-right">4,500</div>
+        </div>
+      </div>
+      <div class="contract-budget-grid s-grey">
+        <div class="contract-budget-detail-grid">
+          <div>Remaining</div>
+          <div class="text-right">8,000</div>
+        </div>
+      </div>
+    </div>
+  </aid-page-content-card>
+</div>

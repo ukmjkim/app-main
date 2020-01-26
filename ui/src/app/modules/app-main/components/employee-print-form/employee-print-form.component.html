@@ -1,0 +1,157 @@
+<div class="printing--container">
+    <!-- Print Button -->
+    <div class="printing--actions printing--doNotPrint">
+    <div class="printing--footer-buttons">
+            <h3>Printing {{sellerCostPrintForm.totalPages}} Pages</h3>
+            <button class="btn btn-primary printing--print" id="print-preview-print" (click)="print()"><mat-icon>print</mat-icon> Print</button>
+    </div>
+    </div>
+
+    <!-- Print Content -->
+    <div id="print-preview" class="printing--preview">
+    <ng-container *ngFor="let sellerCostPrintForm of sellerCostPrintFormList; let index = index">
+            <div id="contentToConvert" class="po-font mb-4 printing--page">
+            <div class="row print-form-section">
+                <div class="col-md-3 po-company-brand font-big">
+                    <img src="/n_images/rb-logo.png" width="200px" alt="" />
+                </div>
+                <div class="col-md-6 po-company-name font-big">
+                    {{sellerCostPrintForm.site.siteHeadOfficeDto ? sellerCostPrintForm.site.siteHeadOfficeDto.headOfficeName : ''}}
+                </div>
+                <div class="col-md-3 po-company-address text-right font-small">
+                    <div>{{sellerCostPrintForm.site.siteHeadOfficeDto.headOfficeContact ? sellerCostPrintForm.site.siteHeadOfficeDto.headOfficeContact.address : ''}}</div>
+                    <div>{{sellerCostPrintForm.site.siteHeadOfficeDto.headOfficeContact ? sellerCostPrintForm.site.siteHeadOfficeDto.headOfficeContact.cityProvince
+                        : ''}} {{sellerCostPrintForm.site.siteHeadOfficeDto.headOfficeContact ? sellerCostPrintForm.site.siteHeadOfficeDto.headOfficeContact.postcode
+                        : ''}}</div>
+                    <div>Tel {{sellerCostPrintForm.site.siteHeadOfficeDto.headOfficeContact ? sellerCostPrintForm.site.siteHeadOfficeDto.headOfficeContact.phoneNumber
+                        : ''}} Fax {{sellerCostPrintForm.site.siteHeadOfficeDto.headOfficeContact ? sellerCostPrintForm.site.siteHeadOfficeDto.headOfficeContact.faxNumber
+                        : ''}}</div>
+                    <div>rbauction.com</div>
+                </div>
+            </div>
+            <hr />
+            <div class="row print-form-section">
+                <div class="col-md-4 font-small">
+
+                    <div>
+                        <strong>Auction: {{sellerCostPrintForm.auctionName}} (#{{sellerCostPrintForm.saleNumber}})</strong>
+                    </div>
+                    <div>{{sellerCostPrintForm.site.address ? sellerCostPrintForm.site.address.address : ''}}</div>
+                    <div>{{sellerCostPrintForm.site.address ? sellerCostPrintForm.site.address.cityProvinceCountry : ''}}
+                        {{sellerCostPrintForm.site.address ? sellerCostPrintForm.site.address.postcode : ''}}</div>
+                    <div>
+                        {{sellerCostPrintForm.site.address && sellerCostPrintForm.site.address.phoneNumber ? 'Auction Tel: ' + sellerCostPrintForm.site.address.phoneNumber : ''}}
+                    </div>
+                    <div>
+                        {{sellerCostPrintForm.site.address && sellerCostPrintForm.site.address.faxNumber ? 'Auction Fax: ' + sellerCostPrintForm.site.address.faxNumber : ''}}
+                    </div>
+                </div>
+                <div class="col-md-4 po-template font-medium">
+                    <div>
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="col-md-4 text-right font-big">
+                    <div>
+                        <strong>COST SHEET</strong>
+                    </div>
+                    <div>
+                        <strong>Owner: {{sellerCostPrintForm.ownerCode}}</strong>
+                    </div>
+                    <div>
+                        <strong>Contract: {{sellerCostPrintForm.salesHubContractId}}</strong>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row print-form-section mt-4" *ngIf="sellerCostPrintForm.currentPage === 1">
+                <div class="col-md-6 po-supplier form-two-col-display">
+                    <div>
+                        <strong>Owner:</strong>
+                    </div>
+                    <div>{{sellerCostPrintForm.seller.companyName ? sellerCostPrintForm.seller.companyName : sellerCostPrintForm.seller.fullName}}</div>
+                    <div *ngIf="sellerCostPrintForm.seller.companyName">
+                        <strong>Contact name:</strong>
+                    </div>
+                    <div *ngIf="sellerCostPrintForm.seller.companyName">
+                        {{sellerCostPrintForm.seller.fullName ? sellerCostPrintForm.seller.fullName : ''}}
+                    </div>
+                    <div>
+                        <strong>Address:</strong>
+                    </div>
+                    <div>{{sellerCostPrintForm.seller.address ? sellerCostPrintForm.seller.address : ''}}<br />
+                        {{sellerCostPrintForm.seller.cityProvinceCountry ? sellerCostPrintForm.seller.cityProvinceCountry : ''}},
+                        {{sellerCostPrintForm.seller.postcode ? sellerCostPrintForm.seller.postcode : ''}}</div>
+                    <div>
+                        <strong>Telephone:</strong>
+                    </div>
+                    <div>{{sellerCostPrintForm.seller.phoneNumber ? sellerCostPrintForm.seller.phoneNumber : ''}}</div>
+                </div>
+                <div class="col-md-6 po-form-two-col-display">
+                </div>
+            </div>
+
+            <div class="row print-form-section mt-4 mb-4">
+                <div class="col-md-12">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Sch</th>
+                                <th scope="col">Lot#</th>
+                                <th scope="col">Asset Description</th>
+                                <th scope="col">Service Details</th>
+                                <th scope="col">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of sellerCostPrintForm.items; let index = index">
+                                <th width="60px" scope="row">
+                                    {{item.scheduleA}}
+                                </th>
+                                <td>{{item.LotNum}}</td>
+                                <td>{{item.equipDescription}}<br />{{item.serialNumber}}</td>
+                                <td>{{item.costSheetDescription}}</td>
+                                <td class="text-right">{{item.amount.toFixed(2)}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr *ngIf="sellerCostPrintForm.currentPage === sellerCostPrintForm.totalPages">
+                                <th class="text-right" scope="row" colspan="5">Total ({{sellerCostPrintForm.site.defaultCurrency}}) : {{sellerCostPrintForm.totalAmount.toFixed(2)}}</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div style="height:100px; overflow-y:auto;">
+            </div>
+
+            <div id="footer" class="printing--footer">
+                <div class="row print-form-section mt-2">
+                    <div class="col-md-6 font-small">
+                        Printed by: {{sellerCostPrintForm.printedByUserName}}
+                    </div>
+                    <div class="col-md-6 text-right font-small">
+                        Printed on: {{sellerCostPrintForm.printedOnTimestamp | date:dateTimeFormat}}
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="row print-form-section">
+                    <div class="col-md-1 font-small">
+                        print form
+                    </div>
+                    <div class="col-md-9 font-small text-center">
+                        Copyright This document contains confidential proprietary information and is intended only solely for the use of Ritchie Bros. Auctioneers.
+                        <br/> Any unauthorized use is strictly prohibited.
+                    </div>
+                    <div class="col-md-2 text-right font-small">
+                        Page {{sellerCostPrintForm.currentPage}} of {{sellerCostPrintForm.totalPages}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p style="page-break-after: always">
+    </ng-container>
+    </div>
+</div>

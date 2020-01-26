@@ -1,0 +1,113 @@
+@import "~@ukmjkim/aid-ux-components/scss/colors";
+
+@media print{
+  .doNotPrint{display:none !important;}
+}
+
+.form--actions{
+  z-index: 1;
+  background-color: palette(grey,2);
+  padding: 15px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+}
+
+
+
+.po-font {
+    color: #000000;
+    font-family: 'Arial';
+}
+
+.font-big {
+    font-size:18px;
+}
+
+.font-medium {
+    font-size:14px;
+}
+
+.font-small {
+    font-size:12px;
+}
+
+.font-extra-small {
+    font-size:10px;
+    font-weight: normal;
+}
+
+.print-form-section {
+
+}
+
+.po-company-brand {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.po-company-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.po-company-address {
+
+}
+
+hr {
+    border-top:3px dotted #000;
+}
+
+.form-two-col-display {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: visible;
+    background: white;
+    display: grid;
+    grid-template-columns: 150px auto;
+    grid-gap: 5px;
+}
+
+.po-revision {
+
+}
+
+.po-template {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.po-number {
+
+}
+
+table {
+    table-layout: auto;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+caption {
+    caption-side: top;
+}
+
+h6, th {
+    color: #000000 !important;
+}
+
+thead > tr {
+    border-top: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    height: 50px;
+}
+
+tbody {
+    border-bottom: 2px solid #000000;
+}
+
+tbody > tr {
+    height: 80px;
+}
