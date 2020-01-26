@@ -1,0 +1,155 @@
+
+<div class="card m-3">
+    <h5 class="card-header">{{dialogLabel}}</h5>
+    <div class="card-body">
+        <form [formGroup]="registerForm">
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Testing Date Time</label>
+                    <input type="datetime-local" formControlName="testDateTime" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.testDateTime.errors }" />
+                    <div *ngIf="submitted && f.testDateTime.errors" class="invalid-feedback">
+                        <div *ngIf="f.testDateTime.errors.required">Testing Date Time is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Test #</label>
+                    <input type="text" formControlName="id" class="form-control" [readOnly]="true" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label>Room Temperature</label>
+                    <input type="text" formControlName="roomTemperature" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.roomTemperature.errors }" />
+                    <div *ngIf="submitted && f.roomTemperature.errors" class="invalid-feedback">
+                        <div *ngIf="f.roomTemperature.errors.required">Room Temperature is required</div>
+                        <div *ngIf="f.roomTemperature.errors.pattern">Room Temperature must be number</div>
+                    </div>
+                </div>
+                <div class="form-group col-4">
+                    <label>Room Moisture</label>
+                    <input type="text" formControlName="roomMoisture" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.roomMoisture.errors }" />
+                    <div *ngIf="submitted && f.roomMoisture.errors" class="invalid-feedback">
+                        <div *ngIf="f.roomMoisture.errors.required">Room Moisture is required</div>
+                        <div *ngIf="f.roomMoisture.errors.pattern">Room Moisture must be number</div>
+                    </div>
+                </div>
+                <div class="form-group col-4">
+                    <label>Testing Temperature</label>
+                    <input type="text" formControlName="testingTemperature" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.testingTemperature.errors }" />
+                    <div *ngIf="submitted && f.testingTemperature.errors" class="invalid-feedback">
+                        <div *ngIf="f.testingTemperature.errors.required">Testing Temperature is required</div>
+                        <div *ngIf="f.testingTemperature.errors.pattern">Testing Temperature must be number</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Bag</label>
+                    <select formControlName="bag" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.bag.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let bag of bagList" [value]="bag.id">{{ContentDataItemDto.getKeyBag(bag, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.bag.errors" class="invalid-feedback">
+                        <div *ngIf="f.bag.errors.required">Bag is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Test Passed</label>
+                    <div class="input-value">
+                      <div class="switch-field">
+                          <input type="radio" id="is-test-passed-yes" formControlName="isTestPassed" class="form-control" [value]="true" name="isTestPassed" />
+                          <label for="is-test-passed-yes">Yes</label>
+                          <input type="radio" id="is-test-passed-no" formControlName="isTestPassed" class="form-control" [value]="false" name="isTestPassed" />
+                          <label for="is-test-passed-no">No</label>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <label>Sample</label>
+                    <input type="text" formControlName="sample" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.sample.errors }" />
+                    <div *ngIf="submitted && f.sample.errors" class="invalid-feedback">
+                        <div *ngIf="f.sample.errors.required">Sample is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Drying Time</label>
+                    <input type="text" formControlName="dryingTime" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dryingTime.errors }" />
+                    <div *ngIf="submitted && f.dryingTime.errors" class="invalid-feedback">
+                        <div *ngIf="f.dryingTime.errors.required">Drying Time is required</div>
+                        <div *ngIf="f.dryingTime.errors.pattern">Drying Time must be number</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Weight Before Drying</label>
+                    <input type="text" formControlName="weightBeforeDrying" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.weightBeforeDrying.errors }" />
+                    <div *ngIf="submitted && f.weightBeforeDrying.errors" class="invalid-feedback">
+                        <div *ngIf="f.weightBeforeDrying.errors.required">Weight Before Drying is required</div>
+                        <div *ngIf="f.weightBeforeDrying.errors.pattern">Weight Before Drying must be number</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Weight After Drying</label>
+                    <input type="text" formControlName="weightAfterDrying" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.weightAfterDrying.errors }" />
+                    <div *ngIf="submitted && f.weightAfterDrying.errors" class="invalid-feedback">
+                        <div *ngIf="f.weightAfterDrying.errors.required">Weight After Drying is required</div>
+                        <div *ngIf="f.weightAfterDrying.errors.pattern">Weight After Drying must be number</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Moisture</label>
+                    <input type="text" formControlName="moisture" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.moisture.errors }" />
+                    <div *ngIf="submitted && f.moisture.errors" class="invalid-feedback">
+                        <div *ngIf="f.moisture.errors.required">Moisture is required</div>
+                        <div *ngIf="f.moisture.errors.pattern">Moisture must be number</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Lab Technician</label>
+                    <select formControlName="labTechnician" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.labTechnician.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let employee of labTechnicians" [value]="employee.id">{{ContentDataItemDto.getKeyEmployee(employee, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.labTechnician.errors" class="invalid-feedback">
+                        <div *ngIf="f.labTechnician.errors.required">Lab Technician is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Lab Supervisor</label>
+                    <select formControlName="labSupervisor" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.labSupervisor.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let employee of labSupervisors" [value]="employee.id">{{ContentDataItemDto.getKeyEmployee(employee, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.labSupervisor.errors" class="invalid-feedback">
+                        <div *ngIf="f.labSupervisor.errors.required">Lab Supervisor is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <label>Note</label>
+                    <textarea type="text" formControlName="note" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.note.errors }"></textarea>
+                    <div *ngIf="submitted && f.note.errors" class="invalid-feedback">
+                        <div *ngIf="f.note.errors.required">Note is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary mr-1" (click)="onSubmit()">Submit</button>
+                <button class="btn btn-warning mr-1" type="button" (click)="onDelete()" *ngIf="!isNew" [disabled]="true">Delete</button>
+                <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Clear</button>
+                <button class="btn btn-secondary" type="close" (click)="onClose()">Close</button>
+            </div>
+        </form>
+    </div>
+</div>

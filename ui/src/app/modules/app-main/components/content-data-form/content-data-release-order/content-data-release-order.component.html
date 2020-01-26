@@ -1,0 +1,63 @@
+
+<div class="card m-3">
+    <h5 class="card-header">{{dialogLabel}}</h5>
+    <div class="card-body">
+        <form [formGroup]="registerForm">
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label>Farm</label>
+                    <select formControlName="farm" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.farm.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let farm of farmList" [value]="farm.id">{{farm.farmName}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.farm.errors" class="invalid-feedback">
+                        <div *ngIf="f.farm.errors.required">Farm is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-4">
+                    <label>Shipping Date Time</label>
+                    <input type="datetime-local" formControlName="shippingDateTime" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.shippingDateTime.errors }" />
+                    <div *ngIf="submitted && f.shippingDateTime.errors" class="invalid-feedback">
+                        <div *ngIf="f.shippingDateTime.errors.required">Shipping Date Time is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-4">
+                    <label>Truck License Plate</label>
+                    <input type="text" formControlName="truckLicensePlate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.truckLicensePlate.errors }" />
+                    <div *ngIf="submitted && f.truckLicensePlate.errors" class="invalid-feedback">
+                        <div *ngIf="f.truckLicensePlate.errors.required">Truck License Plate is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Production Manager</label>
+                    <select formControlName="productionManager" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.productionManager.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let employee of productionManagers" [value]="employee.id">{{ContentDataItemDto.getKeyEmployee(employee, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.productionManager.errors" class="invalid-feedback">
+                        <div *ngIf="f.productionManager.errors.required">Production Manager is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Accounting Manager</label>
+                    <select formControlName="accountingManager" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.accountingManager.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let employee of accountingManagers" [value]="employee.id">{{ContentDataItemDto.getKeyEmployee(employee, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.accountingManager.errors" class="invalid-feedback">
+                        <div *ngIf="f.accountingManager.errors.required">Accounting Manager is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary mr-1" (click)="onSubmit()">Submit</button>
+                <button class="btn btn-warning mr-1" type="button" (click)="onDelete()" *ngIf="!isNew" [disabled]="true">Delete</button>
+                <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Clear</button>
+                <button class="btn btn-secondary" type="close" (click)="onClose()">Close</button>
+            </div>
+        </form>
+    </div>
+</div>

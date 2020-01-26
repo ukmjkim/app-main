@@ -1,0 +1,24 @@
+
+<div class="card m-3">
+    <h5 class="card-header">{{dialogLabel}}</h5>
+    <div class="card-body">
+        <form [formGroup]="registerForm">
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Name</label>
+                    <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Name is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary mr-1" (click)="onSubmit()">Submit</button>
+                <button class="btn btn-warning mr-1" type="button" (click)="onDelete()" *ngIf="!isNew" [disabled]="true">Delete</button>
+                <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Clear</button>
+                <button class="btn btn-secondary" type="close" (click)="onClose()">Close</button>
+            </div>
+        </form>
+    </div>
+</div>

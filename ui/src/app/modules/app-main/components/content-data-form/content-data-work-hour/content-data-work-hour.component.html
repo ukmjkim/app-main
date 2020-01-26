@@ -1,0 +1,47 @@
+
+<div class="card m-3">
+    <h5 class="card-header">{{dialogLabel}}</h5>
+    <div class="card-body">
+        <form [formGroup]="registerForm">
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Employee</label>
+                    <select formControlName="employee" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.employee.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let employee of workers" [value]="employee.id">{{ContentDataItemDto.getKeyEmployee(employee, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.employee.errors" class="invalid-feedback">
+                        <div *ngIf="f.employee.errors.required">Employee is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Work Shift</label>
+                    <select formControlName="workShift" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.workShift.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let workShift of workShiftList" [value]="workShift.id">{{ContentDataItemDto.getKeyWorkShift(workShift, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.workShift.errors" class="invalid-feedback">
+                        <div *ngIf="f.workShift.errors.required">Work Shift is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Worked Hours</label>
+                    <input type="text" formControlName="workedHours" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.workedHours.errors }" />
+                    <div *ngIf="submitted && f.workedHours.errors" class="invalid-feedback">
+                        <div *ngIf="f.workedHours.errors.required">Worked Hours is required</div>
+                        <div *ngIf="f.workedHours.errors.pattern">Worked Hours must be number</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary mr-1" (click)="onSubmit()">Submit</button>
+                <button class="btn btn-warning mr-1" type="button" (click)="onDelete()" *ngIf="!isNew" [disabled]="true">Delete</button>
+                <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Clear</button>
+                <button class="btn btn-secondary" type="close" (click)="onClose()">Close</button>
+            </div>
+        </form>
+    </div>
+</div>

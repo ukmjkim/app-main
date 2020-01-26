@@ -1,0 +1,53 @@
+
+<div class="card m-3">
+    <h5 class="card-header">{{dialogLabel}}</h5>
+    <div class="card-body">
+        <form [formGroup]="registerForm">
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Shift Name</label>
+                    <input type="text" formControlName="shiftName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.shiftName.errors }" />
+                    <div *ngIf="submitted && f.shiftName.errors" class="invalid-feedback">
+                        <div *ngIf="f.shiftName.errors.required">Shift Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Work Date</label>
+                    <input type="text" formControlName="workDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.workDate.errors }" />
+                    <div *ngIf="submitted && f.workDate.errors" class="invalid-feedback">
+                        <div *ngIf="f.workDate.errors.required">Work Date is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Dryshop Manager</label>
+                    <select formControlName="dryshopManager" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dryshopManager.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let employee of dryShopManagers" [value]="employee.id">{{ContentDataItemDto.getKeyEmployee(employee, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.dryshopManager.errors" class="invalid-feedback">
+                        <div *ngIf="f.dryshopManager.errors.required">Dryshop Manager is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Production Supervisor</label>
+                    <select formControlName="productionSupervisor" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.productionSupervisor.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let employee of productionSupervisors" [value]="employee.id">{{ContentDataItemDto.getKeyEmployee(employee, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.productionSupervisor.errors" class="invalid-feedback">
+                        <div *ngIf="f.productionSupervisor.errors.required">Production Supervisor is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary mr-1" (click)="onSubmit()">Submit</button>
+                <button class="btn btn-warning mr-1" type="button" (click)="onDelete()" *ngIf="!isNew" [disabled]="true">Delete</button>
+                <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Clear</button>
+                <button class="btn btn-secondary" type="close" (click)="onClose()">Close</button>
+            </div>
+        </form>
+    </div>
+</div>

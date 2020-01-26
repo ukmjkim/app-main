@@ -1,0 +1,23 @@
+@import "~@ukmjkim/aid-ux-components/scss/colors";
+@import "~@ukmjkim/aid-ux-components/scss/breakpoints";
+
+$almost-white: #f9f9f9;
+
+:host {
+    display: grid;
+    min-height: 0;
+}
+
+@mixin md-icon-size($size: 24px) {
+    font-size: $size;
+    height: $size;
+    width: $size;
+}
+
+.mat-icon {
+    @include md-icon-size(24px);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
