@@ -1,0 +1,54 @@
+<h1 mat-dialog-title class="dialog-header">Sign In</h1>
+
+<div *ngIf="!isSuccessfullySignedIn">
+  <div mat-dialog-content>
+    <div fxLayout="column" fxFlex>
+      <form novalidate (keyup.enter)="signIn()">
+        <div fxLayout="row" fxFlexOffset="20" fxFlex="60">
+          <div fxFlex fxLayout="column" fxLayoutAlign="center stretch">
+            <div class="m-4">
+              <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Login Name</mat-label>
+                <input type="text" required matInput
+                      placeholder=""
+                      [formControl]="nameCtrl">
+                <mat-error *ngIf="nameCtrl.hasError('required')">Name is required.</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="m-4">
+              <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Password</mat-label>
+                <input required matInput
+                      autocomplete="new-password"
+                      type="password" [formControl]="passwordCtrl">
+                <mat-error *ngIf="passwordCtrl.hasError('required')">Password is required.</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div *ngIf="errorMessage">
+        <div fxLayout="row">
+          <div fxFlexOffset="10" fxFlex="80" class="text-danger" [innerHTML]="errorMessage">&nbsp;</div>
+        </div>
+      </div>
+      <div fxLayout="row" *ngIf="isProcessing" class="processing" fxLayoutAlign="center center">
+        &nbsp;<mat-progress-spinner [mode]="'indeterminate'" [diameter]="30"></mat-progress-spinner>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
+      <button mat-raised-button class="mat-primary" (click)="signIn()" [disabled]="signInForm.invalid || isProcessing">Sign In</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isSuccessfullySignedIn">
+  <div mat-dialog-content>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <h3 class="text-success">Welcome back, {{loggedInUser.fullName}}!</h3>
+      <div class="text-success">Loading your data ...</div>
+    </div>
+  </div>
+</div>
