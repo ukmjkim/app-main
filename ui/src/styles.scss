@@ -1,0 +1,81 @@
+@import "~@ukmjkim/aid-ux-components/base-style.css";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "scss/form";
+
+html {
+  font-size: 16px;
+}
+
+.printing--container{
+  display: grid;
+  grid-template-areas: "actions preview";
+  grid-template-columns: 250px 1fr;
+  width: 100%;
+  height: 100%;
+}
+
+.printing--actions{
+grid-area: actions;
+min-height: 0;
+z-index: 1;
+background-color: palette(grey,2);
+padding: 15px;
+box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+text-align: center;
+}
+
+  .printing--print{
+      display: inline-flex;
+
+      mat-icon{
+          margin-right: 10px;
+      }
+  }
+
+.printing--preview{
+  padding: 60px 0;
+  overflow-y: auto;
+}
+
+.printing--page{
+  margin: 0 auto;
+  max-width: 1200px;
+  min-height: 1553px;
+  padding: 60px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.printing--footer{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+@media print{
+  .printing--doNotPrint{display:none !important;}
+
+  .printing--container{
+      display: block;
+  }
+
+  .printing--preview{
+      padding: 0;
+      overflow: hidden;
+  }
+
+  .printing--page{
+      margin: 0;
+      padding: 0;
+      max-width: auto;
+      min-height: auto;
+      display: block;
+      text-align: initial;
+  }
+
+  .printing--footer{
+      display: block;
+  }
+}
