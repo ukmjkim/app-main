@@ -1,0 +1,124 @@
+@import "~@ukmjkim/aid-ux-components/base-style.css";
+@import "~@ukmjkim/aid-ux-components/scss/colors";
+@import "~@ukmjkim/aid-ux-components/scss/breakpoints";
+
+search-input {
+    display: inline-block;
+    min-width: 350px;
+  }
+
+  .s-hidden{
+    display: none;
+  }
+
+  .sold--chart{
+    width: 100%;
+    grid-area: chart;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "chartcontainer";
+    justify-items: center;
+    justify-self: center;
+
+    .statuses--chart{
+      grid-area: chartcontainer;
+      max-width: 420px;
+    }
+
+    .statuses--titled-count{
+      grid-area: chartcontainer;
+      margin-top: 25px;
+    }
+  }
+
+  .statuses--sold {
+    display: grid;
+    /* autoprefixer: ignore next */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
+    margin-top: 15px;
+    justify-items: stretch;
+  }
+
+  .title-problems {
+    @include breakpoint(m) {
+      display: grid;
+      grid-gap: 30px;
+      grid-template-areas: "left right" "footer footer";
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr auto;
+    }
+
+    header i {
+      font-size: 1.5em;
+    }
+  }
+
+  .problems--issues {
+    grid-area: left;
+  }
+
+  .problems--jurisdiction {
+    @include breakpoint(m-max) {
+      margin-top: 20px;
+    }
+
+    grid-area: right;
+  }
+
+  .problems--container {
+    display: grid;
+    /* autoprefixer: ignore next */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
+    margin-top: 15px;
+
+    & > * {
+      border: 1px solid palette(grey, 1);
+      border-left-width: 4px;
+      border-radius: 4px;
+      padding: 5px 15px;
+    }
+  }
+
+  .problems--footer {
+    grid-area: footer;
+    text-align: center;
+  }
+
+  .wink-icon {
+    width: 70px;
+    height: 90px;
+  }
+
+  .statuses--sub-title {
+    width: 100%;
+    background: #000000;
+  }
+
+  .po-local-status{
+    border-left: 2px solid palette(grey,2);
+    padding-left: 10px;
+
+  }
+
+  aid-data-table-column-selector {
+    cursor: pointer;
+
+    mat-icon {
+      color: #0072c2 !important;
+    }
+  }
+
+.thumbnail-view-button {
+  color: #0072c2 !important;
+  background: #fff;
+  padding: 4px;
+  display: inline-block;
+  border-radius: 32px;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  margin-right: 5px;
+}

@@ -1,0 +1,148 @@
+@import "~@ukmjkim/aid-ux-components/scss/colors";
+@import "~@ukmjkim/aid-ux-components/scss/breakpoints";
+
+$almost-white: #f9f9f9;
+
+::ng-deep .mat-sort-header-container {
+  height: 36px;
+  padding-left: 8px;
+}
+
+.page-title-issues {
+  color: #E2411B;
+}
+
+.row-count {
+  display: inline-block;
+  width: 160px;
+}
+
+
+.toolbar {
+  text-align: right;
+}
+
+.mat-row:hover {
+  background-color: $almost-white;
+}
+
+.filter-header {
+  background-color: #ababab;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.filter-header .mat-input-wrapper {
+  padding-bottom: 0;
+}
+
+.filter-header .mat-form-field-infix {
+  padding: 10px 0 10px 0;
+  border: 0px;
+}
+
+.filter-header .mat-input-underline {
+  display: none !important;
+}
+
+.filter-header button:focus {
+  outline: none;
+}
+
+.filter-header .mat-button {
+  margin: 0;
+  padding: 0;
+  line-height: 32px;
+  width: 100%;
+}
+
+.shootPriceSliderContainer {
+  width: 180px;
+  margin: 20px 40px 20px 40px;
+}
+
+.shootPriceButton .mat-select-arrow {
+  position: relative;
+  top: 9px;
+}
+
+mat-row mat-cell {
+  margin-left: 2px;
+}
+
+.footer {
+  width: 100%;
+  z-index: 210;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.mat-paginator {
+  background-color: #EFEFEF;
+}
+
+.no-sort-header {
+  display: block;
+  padding-bottom: 18px;
+}
+
+.filter-header .mat-form-field, .filter-header .shootPriceButton {
+  margin-bottom: 1px;
+}
+
+
+.thumbnail-view-button {
+  color: #0072C2 !important;
+  background: #fff;
+  padding: 4px;
+  display: inline-block;
+  border-radius: 32px;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+aid-data-table-column-selector {
+  cursor: pointer;
+
+  mat-icon {
+    color: #0072C2 !important;
+  }
+}
+
+.selection-text {
+  padding-bottom: 5px;
+  font-size: 14px;
+}
+
+
+.data-table--header{
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-template-areas: "title toolbar" "search search";
+  grid-gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+
+  @include breakpoint(m){
+    grid-template-areas: "title search toolbar";
+  }
+}
+
+  .header--title{
+    grid-area: title;
+  }
+
+  .header--search{
+    grid-area: search;
+
+    @include breakpoint(m){
+      width: 350px;
+    }
+  }
+
+  .header--toolbard{
+    grid-area: toolbar
+  }

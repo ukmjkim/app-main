@@ -1,0 +1,193 @@
+
+<div class="data-table--header mt-4">
+  <h3 class="header--title">{{dataSource?.rowCount() | async}} Contracts</h3>
+  <aid-search-input class="header--search">
+    <input id="searchItemInput"
+            type="text"
+            class="form-control font-size-14 font-weight-normal my-0 py-1"
+            [(ngModel)]="search"
+            placeholder="Keywords (hit Enter to search)"
+            aria-describedby="basic-addon1" #searchInputBox
+            (keyup.enter)="applyGlobalSearch()">
+    <button id="searchItemButton" class="btn btn-primary font-size-14 text-transform-none"
+            (click)="applyGlobalSearch()">Search
+    </button>
+  </aid-search-input>
+
+  <div class="header--toolbar">
+    <a id="clear-all-filters-button" (click)="clearAllFiltersAndSort()"
+        class="thumbnail-view-button mat-elevation-z3">
+      <mat-icon matTooltip="Clear Filters and Sort">clear_all</mat-icon>
+    </a>
+    <a id="export-to-excel-button" (click)="exportToExcel()" class="thumbnail-view-button mat-elevation-z3">
+      <mat-icon matTooltip="Export to Excel">save_alt</mat-icon>
+    </a>
+    <a id="view-refresh" (click)="applyGlobalSearch()" class="thumbnail-view-button mat-elevation-z3">
+      <mat-icon matTooltip="Refresh">refresh</mat-icon>
+    </a>
+    <aid-data-table-column-selector matTooltip="Column selector"
+                                      [dataTable]="table"></aid-data-table-column-selector>
+  </div>
+</div>
+
+<aid-data-table-active-filter-sort-chip [dataSource]="dataSource" [dateFormat]="dateFormat"></aid-data-table-active-filter-sort-chip>
+
+<mat-toolbar>
+  <div class="table-toolbar" fxLayout="row" fxLayoutAlign="space-between center" fxFlex>
+    <div>
+        <span>
+          <span *ngIf="selectedItemList.length === 0">No contract selected.</span>
+          <span *ngIf="selectedItemList.length > 0"><strong>{{selectedItemList.length | number}}</strong> {{selectedItemList.length === 1 ? 'contract' : 'contracts'}} selected.</span>
+        </span>&nbsp;
+    </div>
+  </div>
+</mat-toolbar>
+
+<div id="data-table-wrapper">
+  <aid-data-table #table
+                    [dataSource]="dataSource"
+                    [displayedColumns]="displayedColumns"
+                    [enableSelection]="true"
+                    [minWidthPx]="900"
+                    [pageSize]="numberOfItemsPerPage"
+                    [pageSizeOptions]="pageSizeOptions"
+                    [dateFormat]="dateFormat"
+                    [multisort]="true">
+
+      <ng-container *aidColDef="'ownerCode';
+                    let row = row;
+                    header: 'Owner Code';
+                    width: '0px';
+                    headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE;
+                    filterType:FilterTypeEnum.TEXT_RANGE" >
+        <div class="row-container">
+        {{row.ownerCode}}
+        </div>
+      </ng-container>
+
+      <ng-container *aidColDef="'ownerLabel';
+                    let row = row;
+                    header: 'Owner';
+                    width: '100px';
+                    headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE;
+                    filterType:FilterTypeEnum.TEXT_RANGE" >
+        <div class="row-container">
+        {{row.ownerCode}}
+        </div>
+      </ng-container>
+
+      <ng-container *aidColDef="'salesHubContractNumber';
+                    let row = row;
+                    header: 'Contract#';
+                    width: '120px';
+                    headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE;
+                    filterType:FilterTypeEnum.TEXT">
+        <div class="row-container">
+        {{row.salesHubContractNumber}}
+        </div>
+      </ng-container>
+
+      <ng-container *aidColDef="'sellerCompanyName';
+                    let row = row;
+                    header: 'Company Name';
+                    width: '200px';
+                    headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE;
+                    filterType:FilterTypeEnum.TEXT">
+        <div class="row-container">
+        {{row.sellerCompanyName}}
+        </div>
+      </ng-container>
+
+      <ng-container *aidColDef="'sellerName';
+                    let row = row;
+                    header: 'Contact Name';
+                    width: '150px';
+                    headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE;
+                    filterType:FilterTypeEnum.TEXT">
+        <div class="row-container">
+        {{row.sellerName}}
+        </div>
+      </ng-container>
+
+      <ng-container *aidColDef="'territoryManagerName';
+                    let row = row;
+                    header: 'Sales Rep';
+                    width: '200px';
+                    headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE;
+                    filterType:FilterTypeEnum.TEXT">
+        <div class="row-container">
+        {{row.territoryManagerName}}
+        </div>
+      </ng-container>
+
+      <ng-container *aidColDef="'numberOfUnits';
+                    let row = row;
+                    header: 'Units';
+                    width: '80px';">
+        <div class="row-container">
+          {{row.numberOfUnits}}
+          <span class="font-color-grey" *ngIf="row.numberOfUnits !== row.totalNumberOfUnits">
+            /{{row.totalNumberOfUnits}}
+          </span>
+        </div>
+      </ng-container>
+
+      <ng-container *aidColDef="'shootPrice';
+                    let row = row;
+                    header: 'Total Shoot';
+                    width: '120px';
+                    headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE;
+                    filterType:FilterTypeEnum.NUMBER_RANGE">
+        <div class="row-container text-right pr-2">{{row.shootPrice | currency }}</div>
+      </ng-container>
+
+      <ng-container *aidColDef="'salesHubContractType';
+                    let row = row;
+                    header: 'SH Contract Type';
+                    width: '150px';
+                    headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE;
+                    filterType:FilterTypeEnum.PICKLIST">
+        <div class="row-container">
+        {{row.salesHubContractType}}
+        </div>
+      </ng-container>
+
+      <ng-container *aidColDef="'dashboardContractType';
+                    let row = row;
+                    header: 'Contract Type';
+                    width: '120px';
+                    headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE">
+        <div class="row-container">
+        {{row.dashboardContractType}}
+        </div>
+      </ng-container>
+
+      <ng-container *aidColDef="'contractStatus';
+                    let row = row;
+                    header: 'Status';
+                    width: '100px';
+                    headerType: ColHeaderTypeEnum.SORTABLE_AND_FILTERABLE">
+        <div class="row-container">
+        {{row.contractStatus}}
+        </div>
+      </ng-container>
+
+      <ng-container *aidColDef="'contractConfidential';
+                        let row = row;
+                        header: 'Confidential';
+                        width: '100px';
+                        headerType: ColHeaderTypeEnum.FILTERABLE;
+                        filterType:FilterTypeEnum.PICKLIST">
+        <div class="row-container">
+          <div *ngIf="row.contractConfidential" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon class="text-success">check_circle_outline</mat-icon>
+          </div>
+          <div *ngIf="!row.contractConfidential" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon class="text-danger">highlight_off</mat-icon>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-content *ngIf="enableRowAction"></ng-content>
+  </aid-data-table>
+</div>

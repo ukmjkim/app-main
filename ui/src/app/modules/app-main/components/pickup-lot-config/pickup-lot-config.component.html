@@ -1,0 +1,84 @@
+<aid-page-simple class="page-simple" [fullWidth]="true" [pageTitle]="'Pickup Lot Configuration'" [pageInfo]="appMainState.eventPageInfo ? appMainState.eventPageInfo : appMainState.sitePageInfo">
+<div class="card m-3">
+    <h5 class="card-header">{{dialogLabel}}</h5>
+    <div class="card-body">
+        <form [formGroup]="registerForm">
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Site</label>
+                    <select formControlName="site" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.site.errors }">
+                        <option [value]="'Orlando'">Orlando</option>
+                    </select>
+                    <div *ngIf="submitted && f.site.errors" class="invalid-feedback">
+                        <div *ngIf="f.site.errors.required">Site is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Event</label>
+                    <select formControlName="event" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.event.errors }">
+                        <option [value]='2020190'>Feb, 2020</option>
+                    </select>
+                    <div *ngIf="submitted && f.event.errors" class="invalid-feedback">
+                        <div *ngIf="f.event.errors.required">Event is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label>Lot Range From</label>
+                    <input type="text" formControlName="lotRangeFrom" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lotRangeFrom.errors }" />
+                    <div *ngIf="submitted && f.lotRangeFrom.errors" class="invalid-feedback">
+                        <div *ngIf="f.lotRangeFrom.errors.required">Lot Range From is required</div>
+                        <div *ngIf="f.lotRangeFrom.errors.pattern">Lot Range From must be number</div>
+                    </div>
+                </div>
+                <div class="form-group col-3">
+                    <label>Lot Range To</label>
+                    <input type="text" formControlName="lotRangeTo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lotRangeTo.errors }" />
+                    <div *ngIf="submitted && f.lotRangeTo.errors" class="invalid-feedback">
+                        <div *ngIf="f.lotRangeTo.errors.required">Lot Range To is required</div>
+                        <div *ngIf="f.lotRangeTo.errors.pattern">Lot Range To must be number</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label>Concurrent Pickups</label>
+                    <input type="text" formControlName="cucurrentPickups" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cucurrentPickups.errors }" />
+                    <div *ngIf="submitted && f.cucurrentPickups.errors" class="invalid-feedback">
+                        <div *ngIf="f.cucurrentPickups.errors.required">Concurrent Pickups is required</div>
+                        <div *ngIf="f.cucurrentPickups.errors.pattern">Concurrent Pickups must be number</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label>Block Adjacent Lots</label>
+                    <input type="text" formControlName="blockAdjacentLots" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.blockAdjacentLots.errors }" />
+                    <div *ngIf="submitted && f.blockAdjacentLots.errors" class="invalid-feedback">
+                        <div *ngIf="f.blockAdjacentLots.errors.required">Block Adjacent Lots is required</div>
+                        <div *ngIf="f.blockAdjacentLots.errors.pattern">Block Adjacent Lots must be number</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label>Loading Time</label>
+                    <input type="text" formControlName="loadingTime" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.loadingTime.errors }" />
+                    <div *ngIf="submitted && f.loadingTime.errors" class="invalid-feedback">
+                        <div *ngIf="f.loadingTime.errors.required">Loading Time is required</div>
+                        <div *ngIf="f.loadingTime.errors.pattern">Loading Time must be number</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary mr-1" (click)="onSubmit()">Submit</button>
+                <button class="btn btn-warning mr-1" type="button" (click)="onDelete()" *ngIf="!isNew" [disabled]="true">Delete</button>
+                <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Clear</button>
+                <button class="btn btn-secondary" type="close" (click)="onClose()">Close</button>
+            </div>
+        </form>
+    </div>
+</div>
+</aid-page-simple>

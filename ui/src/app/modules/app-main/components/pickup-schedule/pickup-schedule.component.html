@@ -1,0 +1,13 @@
+<aid-page-simple class="page-simple" [fullWidth]="true" [pageTitle]="'Pickups Calendar'" [pageInfo]="appMainState.eventPageInfo ? appMainState.eventPageInfo : appMainState.sitePageInfo">
+    <ng-container ngProjectAs="headerActionButton">
+        <div class="text-right">
+            <!-- <aid-pickup-action-upsert *ngIf="appMainState" id="{{id}}-po-create" [appMainState]="appMainState">
+            </aid-pickup-action-upsert> -->
+        </div>
+    </ng-container>
+    <div class="card-body" *ngIf="appMainState">
+
+      <aid-pickup-calendar [pickups]="pickups"></aid-pickup-calendar>
+
+    </div>
+</aid-page-simple>
