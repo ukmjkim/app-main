@@ -1,0 +1,127 @@
+
+<div class="card m-3">
+    <h5 class="card-header">{{dialogLabel}}</h5>
+    <div class="card-body">
+        <form [formGroup]="registerForm">
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <label>Name</label>
+                    <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Time is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Drying Order</label>
+                    <select formControlName="dryingOrder" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dryingOrder.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let dryingOrder of dryingOrderList" [value]="dryingOrder.id">{{ContentDataItemDto.getKeyDryingOrder(dryingOrder, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.dryingOrder.errors" class="invalid-feedback">
+                        <div *ngIf="f.dryingOrder.errors.required">Drying Order is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Dryer</label>
+                    <select formControlName="dryer" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dryer.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let dryer of dryerList" [value]="dryer.id">{{dryer.name}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.dryer.errors" class="invalid-feedback">
+                        <div *ngIf="f.dryer.errors.required">Dryer is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Drying Date Time</label>
+                    <input type="datetime-local" formControlName="dryingDateTime" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dryingDateTime.errors }" />
+                    <div *ngIf="submitted && f.dryingDateTime.errors" class="invalid-feedback">
+                        <div *ngIf="f.dryingDateTime.errors.required">Drying Date Time is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Product Breed</label>
+                    <input type="text" formControlName="productBreed" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.productBreed.errors }" />
+                    <div *ngIf="submitted && f.productBreed.errors" class="invalid-feedback">
+                        <div *ngIf="f.productBreed.errors.required">Product Breed</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Drying Weight</label>
+                    <input type="text" formControlName="dryWeight" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dryWeight.errors }" />
+                    <div *ngIf="submitted && f.dryWeight.errors" class="invalid-feedback">
+                        <div *ngIf="f.dryWeight.errors.required">Drying Weight</div>
+                        <div *ngIf="f.dryWeight.errors.pattern">Desired Moisture must be number</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Warehouse Handler</label>
+                    <select formControlName="warehouseHandler" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.warehouseHandler.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let employee of warehouseHandlers" [value]="employee.id">{{ContentDataItemDto.getKeyEmployee(employee, dateFormatPipe)}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.warehouseHandler.errors" class="invalid-feedback">
+                        <div *ngIf="f.warehouseHandler.errors.required">Warehouse Handler is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Work Shift</label>
+                    <select formControlName="workShift" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.workShift.errors }">
+                        <option [value]=''></option>
+                        <option *ngFor="let workShift of workShiftList" [value]="workShift.id">{{ContentDataItemDto.getKeyWorkShift(workShift, dateFormatPipe)}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Storage Zone</label>
+                    <input type="text" formControlName="storageZone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storageZone.errors }" />
+                    <div *ngIf="submitted && f.storageZone.errors" class="invalid-feedback">
+                        <div *ngIf="f.storageZone.errors.required">Storage Zone</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Tag Color</label>
+                    <input type="text" formControlName="tagColor" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.tagColor.errors }" />
+                    <div *ngIf="submitted && f.tagColor.errors" class="invalid-feedback">
+                        <div *ngIf="f.tagColor.errors.required">Tag Color is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>In Warehouse Date Time</label>
+                    <input type="datetime-local" formControlName="inWarehouseDateTime" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.inWarehouseDateTime.errors }" />
+                    <div *ngIf="submitted && f.inWarehouseDateTime.errors" class="invalid-feedback">
+                        <div *ngIf="f.inWarehouseDateTime.errors.required">In Warehouse Date Time is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Status</label>
+                    <select formControlName="status" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                        <option [value]="'New'">New</option>
+                        <option [value]="'Tested'">Tested</option>
+                        <option [value]="'In Release Order'">In Release Order</option>
+                        <option [value]="'Shipped'">Shipped</option>
+                        <option [value]="'Ready For Sale'">Ready For Sale</option>
+                    </select>
+                    <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                        <div *ngIf="f.status.errors.required">Status is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary mr-1" (click)="onSubmit()">Submit</button>
+                <button class="btn btn-warning mr-1" type="button" (click)="onDelete()" *ngIf="!isNew" [disabled]="true">Delete</button>
+                <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Clear</button>
+                <button class="btn btn-secondary" type="close" (click)="onClose()">Close</button>
+            </div>
+        </form>
+    </div>
+</div>

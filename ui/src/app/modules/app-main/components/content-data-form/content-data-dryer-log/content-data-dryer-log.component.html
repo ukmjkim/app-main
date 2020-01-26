@@ -1,0 +1,71 @@
+
+<div class="card m-3">
+  <h5 class="card-header">{{dialogLabel}}</h5>
+  <div class="card-body">
+      <form [formGroup]="registerForm">
+          <div class="form-row">
+              <div class="form-group col-6">
+                  <label>Dryer</label>
+                  <select formControlName="dryer" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dryer.errors }">
+                      <option [value]=''></option>
+                      <option *ngFor="let dryer of dryerList" [value]="dryer.id">{{ContentDataItemDto.getKeyDryer(dryer, dateFormatPipe)}}</option>
+                  </select>
+                  <div *ngIf="submitted && f.dryer.errors" class="invalid-feedback">
+                      <div *ngIf="f.dryer.errors.required">Dryer is required</div>
+                  </div>
+              </div>
+              <div class="form-group col-6">
+                  <label>Work Shift</label>
+                  <select formControlName="workShift" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.workShift.errors }">
+                      <option [value]=''></option>
+                      <option *ngFor="let workShift of workShiftList" [value]="workShift.id">{{ContentDataItemDto.getKeyWorkShift(workShift, dateFormatPipe)}}</option>
+                  </select>
+                  <div *ngIf="submitted && f.workShift.errors" class="invalid-feedback">
+                    <div *ngIf="f.workShift.errors.required">Work Shift is required</div>
+                  </div>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-6">
+                  <label>Down Time Start Date Time</label>
+                  <input type="datetime-local" formControlName="downtimeStartDateTime" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.downtimeStartDateTime.errors }" />
+                  <div *ngIf="submitted && f.downtimeStartDateTime.errors" class="invalid-feedback">
+                      <div *ngIf="f.downtimeStartDateTime.errors.required">Down Time Start Date Time is required</div>
+                  </div>
+              </div>
+              <div class="form-group col-6">
+                  <label>Down Time End Date Time</label>
+                  <input type="datetime-local" formControlName="downtimeEndDateTime" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.downtimeEndDateTime.errors }" />
+                  <div *ngIf="submitted && f.downtimeEndDateTime.errors" class="invalid-feedback">
+                      <div *ngIf="f.downtimeEndDateTime.errors.required">Down Time End Date Time is required</div>
+                  </div>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-12">
+                  <label>Reason</label>
+                  <input type="text" formControlName="reason" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.reason.errors }" />
+                  <div *ngIf="submitted && f.reason.errors" class="invalid-feedback">
+                      <div *ngIf="f.reason.errors.required">Product Breed</div>
+                  </div>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-12">
+                  <label>Action</label>
+                  <input type="text" formControlName="action" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.action.errors }" />
+                  <div *ngIf="submitted && f.action.errors" class="invalid-feedback">
+                      <div *ngIf="f.action.errors.required">Storage Zone</div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="text-center">
+              <button class="btn btn-primary mr-1" (click)="onSubmit()">Submit</button>
+              <button class="btn btn-warning mr-1" type="button" (click)="onDelete()" *ngIf="!isNew" [disabled]="true">Delete</button>
+              <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Clear</button>
+              <button class="btn btn-secondary" type="close" (click)="onClose()">Close</button>
+          </div>
+      </form>
+  </div>
+</div>

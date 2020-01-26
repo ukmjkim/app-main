@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="header">
+    <h4 class="title">Testing COA Log Statistics</h4>
+    <p class="category">Failure Rate</p>
+  </div>
+  <div class="content">
+    <div id="chart-{{id}}" class="ct-chart ct-perfect-fourth">
+        <canvas
+        baseChart
+        [chartType]="'line'"
+        [datasets]="chartData"
+        [labels]="chartLabels"
+        [options]="chartOptions"
+        [legend]="true"
+        (chartClick)="onChartClick($event)">
+        </canvas>
+    </div>
+    <div class="footer">
+      <div class="legend">
+        <span><i class="fa fa-circle text-info"></i> Open </span><span><i class="fa fa-circle text-danger"></i> Bounce </span><span><i class="fa fa-circle text-warning"></i> Unsubscribe </span></div><!----><hr><div class="stats"><i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+      </div>
+    </div>
+  </div>
+</div>

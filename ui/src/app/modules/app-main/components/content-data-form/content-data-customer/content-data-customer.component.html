@@ -1,0 +1,75 @@
+
+<div class="card m-3">
+    <h5 class="card-header">{{dialogLabel}}</h5>
+    <div class="card-body">
+        <form [formGroup]="registerForm">
+          <div class="form-row">
+              <div class="form-group col-12">
+                  <label>Farm</label>
+                  <select formControlName="farm" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.farm.errors }">
+                      <option [value]=''></option>
+                      <option *ngFor="let farm of farmList" [value]="farm.id">{{ContentDataItemDto.getKeyFarm(farm, dateFormatPipe)}}</option>
+                  </select>
+                  <div *ngIf="submitted && f.farm.errors" class="invalid-feedback">
+                      <div *ngIf="f.farm.errors.required">Farm is required</div>
+                  </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-6">
+                <label>First Name</label>
+                <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                    <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                </div>
+              </div>
+              <div class="form-group col-6">
+                <label>Last Name</label>
+                <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-6">
+                <label>Office Phone</label>
+                <input type="text" formControlName="officePhone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.officePhone.errors }" />
+                <div *ngIf="submitted && f.officePhone.errors" class="invalid-feedback">
+                    <div *ngIf="f.officePhone.errors.required">Office Phone is required</div>
+                </div>
+              </div>
+              <div class="form-group col-6">
+                <label>Home Phone</label>
+                <input type="text" formControlName="homePhone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.homePhone.errors }" />
+                <div *ngIf="submitted && f.homePhone.errors" class="invalid-feedback">
+                    <div *ngIf="f.homePhone.errors.required">Home Phone is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-6">
+                <label>Mobile Phone</label>
+                <input type="text" formControlName="mobilePhone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.mobilePhone.errors }" />
+                <div *ngIf="submitted && f.mobilePhone.errors" class="invalid-feedback">
+                    <div *ngIf="f.mobilePhone.errors.required">Mobile Phone is required</div>
+                </div>
+              </div>
+              <div class="form-group col-6">
+                <label>Email</label>
+                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary mr-1" (click)="onSubmit()">Submit</button>
+                <button class="btn btn-warning mr-1" type="button" (click)="onDelete()" *ngIf="!isNew" [disabled]="true">Delete</button>
+                <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Clear</button>
+                <button class="btn btn-secondary" type="close" (click)="onClose()">Close</button>
+            </div>
+        </form>
+    </div>
+</div>
