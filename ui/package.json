@@ -86,7 +86,7 @@
     "angular2-csv": "0.2.5",
     "chart.js": "2.7.2",
     "codelyzer": "^5.0.1",
-    "karma": "^4.0.0",
+    "karma": "^6.3.14",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "^2.0.1",
