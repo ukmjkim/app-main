@@ -36,7 +36,7 @@
   "peerDependencies": {
     "rxjs": "6.5.2",
     "rxjs-compat": "6.5.2",
-    "moment": "2.24.0",
+    "moment": "2.29.4",
     "tsickle": "0.37.0",
     "angular-calendar": "^0.28.2",
     "angularx-flatpickr": "^6.1.1",
@@ -91,7 +91,7 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "^2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
-    "moment": "2.24.0",
+    "moment": "2.29.4",
     "ng-packagr": "5.5.0",
     "ng2-charts": "1.6.0",
     "protractor": "^5.4.2",
